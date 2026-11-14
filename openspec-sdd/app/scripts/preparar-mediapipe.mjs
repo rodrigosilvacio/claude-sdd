@@ -24,6 +24,11 @@ if (!existsSync(caminhoModelo)) {
     writeFileSync(caminhoModelo, Buffer.from(await resposta.arrayBuffer()))
     console.log('[mediapipe] modelo de mãos baixado')
   } catch (erro) {
+    // No CI (deploy), publicar sem o modelo deixaria os gestos quebrados: falha o build.
+    if (process.env.MEDIAPIPE_OBRIGATORIO === '1') {
+      console.error(`[mediapipe] falha ao baixar o modelo: ${erro.message}`)
+      process.exit(1)
+    }
     console.warn(`[mediapipe] não foi possível baixar o modelo (${erro.message}). Os gestos ficarão indisponíveis até rodar "npm run preparar-mediapipe" com rede.`)
   }
 }

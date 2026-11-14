@@ -82,3 +82,26 @@ PW_CHROMIUM_PATH=/caminho/do/chromium npm run test:e2e   # PW_CHROMIUM_PATH é o
 ```
 
 Os testes e2e rodam sobre um build com `VITE_E2E=1`, que expõe ganchos de teste (`window.__gemeo` e `window.__gestos`). O Chromium usa uma câmera falsa (`--use-fake-device-for-media-stream`). Os cenários de gesto usam um detector roteirizado que injeta landmarks sintéticos, e o teste de privacidade usa o MediaPipe real. Builds normais (`npm run build`) não incluem esses ganchos.
+
+## Publicação no GitHub Pages
+
+O workflow `.github/workflows/pages.yml` (na raiz do repositório):
+
+1. roda em todo push que altera `openspec-sdd/app/`, ou manualmente em **Actions → Run workflow**;
+2. instala as dependências com `MEDIAPIPE_OBRIGATORIO=1` (se o modelo de mãos não baixar, o build falha em vez de publicar sem gestos);
+3. roda lint e testes unitários;
+4. gera o build com `VITE_BASE=/<nome-do-repositório>/` e confere que o modelo e o WASM estão no pacote;
+5. publica no Pages **somente a partir do branch padrão** do repositório (ou por disparo manual).
+
+Configuração única no GitHub: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+
+Endereço: `https://<usuário>.github.io/<repositório>/`. O Pages serve em HTTPS, então a câmera funciona.
+
+Para testar localmente como no Pages:
+
+```bash
+VITE_BASE=/claude-sdd/ npm run build
+VITE_BASE=/claude-sdd/ npx vite preview   # abre em http://localhost:4173/claude-sdd/
+```
+
+Cada visitante tem o próprio estoque, salvo no navegador dele. Não há backend.
