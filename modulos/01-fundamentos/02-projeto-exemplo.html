@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Projeto de exemplo | Curso de Spec-Driven Development</title>
+  <meta name="description" content="O Projeto_Exemplo do curso: uma lista de tarefas, com objetivo e escopo definidos, usada em todos os tutoriais e exercícios.">
+  <link rel="stylesheet" href="../../assets/css/tokens.css">
+  <link rel="stylesheet" href="../../assets/css/base.css">
+  <link rel="stylesheet" href="../../assets/css/layout.css">
+  <link rel="stylesheet" href="../../assets/css/visuais.css">
+  <script type="module" src="../../assets/js/app.js"></script>
+</head>
+<body data-modulo="fundamentos">
+  <header>
+    <nav class="menu" data-componente="menu" aria-label="Principal">
+      <button type="button" class="menu-botao" aria-expanded="false" aria-controls="menu-lista">Menu</button>
+      <ul class="menu-lista" id="menu-lista">
+        <li><a href="../../index.html">Início</a></li>
+        <li><a href="../01-fundamentos/index.html" data-modulo="fundamentos">Fundamentos</a></li>
+        <li><a href="../02-openspec/index.html" data-modulo="openspec">OpenSpec</a></li>
+        <li><a href="../03-spec-kit/index.html" data-modulo="spec-kit">Spec Kit</a></li>
+        <li><a href="../04-bmad/index.html" data-modulo="bmad">BMAD</a></li>
+        <li><a href="../05-kiro/index.html" data-modulo="kiro">Kiro</a></li>
+        <li><a href="../06-gsd/index.html" data-modulo="gsd">GSD</a></li>
+        <li><a href="../07-spec-kitty/index.html" data-modulo="spec-kitty">Spec Kitty</a></li>
+        <li><a href="../08-specweave/index.html" data-modulo="specweave">SpecWeave</a></li>
+        <li><a href="../09-complementares/index.html" data-modulo="complementares">Complementares</a></li>
+        <li><a href="../../comparador.html">Comparador</a></li>
+        <li><a href="../../certificado.html">Certificado</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container" id="conteudo">
+    <h1>Projeto de exemplo</h1>
+    <p>Todos os tutoriais e exercícios do curso usam o mesmo projeto, o Projeto_Exemplo. Assim você compara as ferramentas em condições equivalentes: o que muda de uma para outra é o fluxo de trabalho, não o problema a resolver.</p>
+
+    <section aria-labelledby="sec-objetivo">
+      <h2 id="sec-objetivo">Objetivo</h2>
+      <p>O Projeto_Exemplo é uma lista de tarefas. O objetivo é permitir que uma pessoa registre o que precisa fazer, acompanhe o que está pendente e marque o que já terminou. O projeto é pequeno de propósito: cabe em uma sessão de estudo e ainda exige requisitos, design e tarefas.</p>
+
+      <figure class="visual">
+        <svg viewBox="0 0 360 230" width="360" role="img" aria-labelledby="tela-titulo tela-desc">
+          <title id="tela-titulo">Esboço da tela da lista de tarefas</title>
+          <desc id="tela-desc">Uma tela com o título Lista de Tarefas, um campo Nova tarefa com o botão Adicionar, e três tarefas: Comprar pão (pendente), Pagar conta (concluída) e Ligar para o dentista (pendente).</desc>
+          <rect x="2" y="2" width="356" height="226" rx="10" fill="#ffffff" stroke="#7a8494" stroke-width="2"/>
+          <text x="20" y="34" font-size="18" font-weight="700" fill="#1a1d21" font-family="system-ui, sans-serif">Lista de Tarefas</text>
+          <rect x="20" y="48" width="230" height="32" rx="6" fill="#ffffff" stroke="#7a8494" stroke-width="2"/>
+          <text x="30" y="69" font-size="14" fill="#4a5260" font-family="system-ui, sans-serif">Nova tarefa</text>
+          <rect x="260" y="48" width="80" height="32" rx="6" fill="#0b4f9c"/>
+          <text x="300" y="69" font-size="14" text-anchor="middle" fill="#ffffff" font-family="system-ui, sans-serif">Adicionar</text>
+          <g font-size="14" fill="#1a1d21" font-family="system-ui, sans-serif">
+            <text x="20" y="116">[ ] Comprar pão (pendente)</text>
+            <text x="20" y="150">[x] Pagar conta (concluída)</text>
+            <text x="20" y="184">[ ] Ligar para o dentista (pendente)</text>
+          </g>
+        </svg>
+        <figcaption>Ilustrativo: esboço da tela da lista de tarefas, com três tarefas de exemplo. Cada tutorial define a tecnologia usada.</figcaption>
+      </figure>
+    </section>
+
+    <section aria-labelledby="sec-escopo">
+      <h2 id="sec-escopo">Escopo</h2>
+      <p>O escopo define o que entra e o que fica de fora. Manter o escopo fixo evita que a comparação mude de uma ferramenta para outra: todas partem da mesma lista de funcionalidades.</p>
+
+      <div class="tabela-rolagem" role="region" aria-label="Tabela de escopo do Projeto_Exemplo" tabindex="0">
+        <table>
+          <caption>Escopo do Projeto_Exemplo</caption>
+          <thead>
+            <tr><th scope="col">Funcionalidade</th><th scope="col">Situação</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Adicionar uma tarefa com título</th><td>Dentro do escopo</td></tr>
+            <tr><th scope="row">Listar as tarefas</th><td>Dentro do escopo</td></tr>
+            <tr><th scope="row">Marcar uma tarefa como concluída</th><td>Dentro do escopo</td></tr>
+            <tr><th scope="row">Remover uma tarefa</th><td>Dentro do escopo</td></tr>
+            <tr><th scope="row">Manter as tarefas ao reabrir o aplicativo</th><td>Dentro do escopo</td></tr>
+            <tr><th scope="row">Contas de usuário e login</th><td>Fora do escopo</td></tr>
+            <tr><th scope="row">Compartilhar listas entre pessoas</th><td>Fora do escopo</td></tr>
+            <tr><th scope="row">Sincronizar entre dispositivos</th><td>Fora do escopo</td></tr>
+            <tr><th scope="row">Notificações e lembretes</th><td>Fora do escopo</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section aria-labelledby="sec-percurso">
+      <h2 id="sec-percurso">Como o projeto aparece no curso</h2>
+      <p>Em cada módulo de ferramenta você parte da mesma descrição do projeto e passa por quatro momentos, nesta ordem.</p>
+
+      <ol class="linha-tempo" aria-label="Momentos do Projeto_Exemplo em cada módulo de ferramenta">
+        <li><strong>Descrição</strong> Você parte do objetivo e do escopo desta página.</li>
+        <li><strong>Tutorial</strong> Você aplica a ferramenta ao projeto, passo a passo.</li>
+        <li><strong>Exercício</strong> Você repete o fluxo com um checklist e uma atividade de ordenar.</li>
+        <li><strong>Quiz</strong> Você confere o que aprendeu.</li>
+      </ol>
+    </section>
+
+    <section class="concluir" aria-label="Conclusão da lição">
+      <button type="button" class="botao-concluir" data-componente="botao-concluir" data-licao="licao:fundamentos/projeto-exemplo" aria-pressed="false" disabled>Marcar como concluída</button>
+    </section>
+
+    <nav class="navegacao-licao" aria-label="Navegação entre lições">
+      <a rel="prev" href="01-o-que-e-sdd.html">&larr; Anterior: O que é SDD</a>
+      <a rel="next" href="quiz.html">Próxima: Quiz de fundamentos &rarr;</a>
+    </nav>
+  </main>
+</body>
+</html>

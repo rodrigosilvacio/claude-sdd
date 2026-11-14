@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tutorial de GitHub Spec Kit | Curso de Spec-Driven Development</title>
+  <meta name="description" content="Tutorial do GitHub Spec Kit: instalação, criação do projeto, fluxo de comandos no chat do agente e pasta .specify/.">
+  <link rel="stylesheet" href="../../assets/css/tokens.css">
+  <link rel="stylesheet" href="../../assets/css/base.css">
+  <link rel="stylesheet" href="../../assets/css/layout.css">
+  <link rel="stylesheet" href="../../assets/css/visuais.css">
+  <script type="module" src="../../assets/js/app.js"></script>
+</head>
+<body data-modulo="spec-kit">
+  <header>
+    <nav class="menu" data-componente="menu" aria-label="Principal">
+      <button type="button" class="menu-botao" aria-expanded="false" aria-controls="menu-lista">Menu</button>
+      <ul class="menu-lista" id="menu-lista">
+        <li><a href="../../index.html">Início</a></li>
+        <li><a href="../01-fundamentos/index.html" data-modulo="fundamentos">Fundamentos</a></li>
+        <li><a href="../02-openspec/index.html" data-modulo="openspec">OpenSpec</a></li>
+        <li><a href="../03-spec-kit/index.html" data-modulo="spec-kit">Spec Kit</a></li>
+        <li><a href="../04-bmad/index.html" data-modulo="bmad">BMAD</a></li>
+        <li><a href="../05-kiro/index.html" data-modulo="kiro">Kiro</a></li>
+        <li><a href="../06-gsd/index.html" data-modulo="gsd">GSD</a></li>
+        <li><a href="../07-spec-kitty/index.html" data-modulo="spec-kitty">Spec Kitty</a></li>
+        <li><a href="../08-specweave/index.html" data-modulo="specweave">SpecWeave</a></li>
+        <li><a href="../09-complementares/index.html" data-modulo="complementares">Complementares</a></li>
+        <li><a href="../../comparador.html">Comparador</a></li>
+        <li><a href="../../certificado.html">Certificado</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container" id="conteudo">
+    <h1>Tutorial de GitHub Spec Kit</h1>
+    <p>O GitHub Spec Kit conduz o SDD no chat do agente, com comandos para constituição, especificação, plano, tarefas, implementação e convergência. Os artefatos do projeto ficam na pasta <code>.specify/</code>.</p>
+
+    <p class="aviso" role="note"><strong>Projeto_Exemplo:</strong> neste tutorial você aplica o fluxo à <strong>Lista de Tarefas</strong>, o projeto descrito em <a href="../01-fundamentos/02-projeto-exemplo.html">Projeto de exemplo</a>.</p>
+
+    <section aria-labelledby="sec-fonte">
+      <h2 id="sec-fonte">Fonte oficial e dados consultados</h2>
+      <ul>
+        <li>Fonte oficial: <a href="https://github.com/github/spec-kit">github.com/github/spec-kit</a></li>
+        <li>Data da consulta: 14/11/2026</li>
+        <li>Versão: versão não informada na fonte</li>
+        <li>Licença: MIT</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="sec-fluxo">
+      <h2 id="sec-fluxo">O fluxo em seis etapas</h2>
+      <p>No chat do agente, o fluxo segue seis comandos, na ordem do diagrama. Repita <code>/speckit-implement</code> e <code>/speckit-converge</code> até a convergência.</p>
+
+      <figure class="visual diagrama" data-ferramenta="spec-kit">
+        <svg viewBox="0 0 900 100" role="img" aria-labelledby="df-titulo df-desc">
+          <title id="df-titulo">Fluxo do GitHub Spec Kit</title>
+          <desc id="df-desc">Seis etapas em sequência: 1 constituição, 2 especificar, 3 planejar, 4 tarefas, 5 implementar e 6 convergir.</desc>
+          <defs>
+            <marker id="df-seta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 z"/>
+            </marker>
+          </defs>
+          <g class="etapa" transform="translate(5,20)"><rect width="130" height="60" rx="8"/><text x="65" y="35">1. Constituição</text></g>
+          <path class="seta" d="M137 50 H159" marker-end="url(#df-seta)"/>
+          <g class="etapa" transform="translate(155,20)"><rect width="130" height="60" rx="8"/><text x="65" y="35">2. Especificar</text></g>
+          <path class="seta" d="M287 50 H309" marker-end="url(#df-seta)"/>
+          <g class="etapa" transform="translate(305,20)"><rect width="130" height="60" rx="8"/><text x="65" y="35">3. Planejar</text></g>
+          <path class="seta" d="M437 50 H459" marker-end="url(#df-seta)"/>
+          <g class="etapa" transform="translate(455,20)"><rect width="130" height="60" rx="8"/><text x="65" y="35">4. Tarefas</text></g>
+          <path class="seta" d="M587 50 H609" marker-end="url(#df-seta)"/>
+          <g class="etapa" transform="translate(605,20)"><rect width="130" height="60" rx="8"/><text x="65" y="35">5. Implementar</text></g>
+          <path class="seta" d="M737 50 H759" marker-end="url(#df-seta)"/>
+          <g class="etapa" transform="translate(755,20)"><rect width="130" height="60" rx="8"/><text x="65" y="35">6. Convergir</text></g>
+        </svg>
+        <figcaption>Fluxo do GitHub Spec Kit no chat do agente.</figcaption>
+        <ol class="alt-textual">
+          <li>Constituição: <code>/speckit-constitution</code></li>
+          <li>Especificar: <code>/speckit-specify</code></li>
+          <li>Planejar: <code>/speckit-plan</code></li>
+          <li>Tarefas: <code>/speckit-tasks</code></li>
+          <li>Implementar: <code>/speckit-implement</code></li>
+          <li>Convergir: <code>/speckit-converge</code></li>
+        </ol>
+      </figure>
+
+      <ol class="linha-tempo" aria-label="Linha do tempo do fluxo do GitHub Spec Kit">
+        <li><strong>Constituição</strong> Primeira etapa do fluxo, com <code>/speckit-constitution</code>.</li>
+        <li><strong>Especificar</strong> Segunda etapa, com <code>/speckit-specify</code>.</li>
+        <li><strong>Planejar</strong> Terceira etapa, com <code>/speckit-plan</code>.</li>
+        <li><strong>Tarefas</strong> Quarta etapa, com <code>/speckit-tasks</code>.</li>
+        <li><strong>Implementar</strong> Quinta etapa, com <code>/speckit-implement</code>.</li>
+        <li><strong>Convergir</strong> Última etapa, com <code>/speckit-converge</code>; repita com implementar até a convergência.</li>
+      </ol>
+    </section>
+
+    <section aria-labelledby="sec-passos">
+      <h2 id="sec-passos">Passo a passo</h2>
+      <p>Use os botões Anterior e Próximo para percorrer os oito passos. Cada comando tem um botão para copiar.</p>
+
+      <ol class="stepper" data-componente="stepper">
+        <li data-titulo="Instalar o Specify CLI">
+          <strong>Instalar o Specify CLI</strong>
+          <p>Exige Python 3.11+ e <code>uv</code>.</p>
+          <div class="bloco-codigo"><pre><code data-comando>uv tool install specify-cli</code></pre> <button type="button" data-componente="copiar" aria-label="Copiar comando: uv tool install specify-cli" hidden>Copiar</button></div>
+        </li>
+        <li data-titulo="Criar o projeto">
+          <strong>Criar o projeto</strong>
+          <div class="bloco-codigo"><pre><code data-comando>specify init my-project --integration copilot</code></pre> <button type="button" data-componente="copiar" aria-label="Copiar comando: specify init my-project --integration copilot" hidden>Copiar</button></div>
+        </li>
+        <li data-titulo="Definir a constituição">
+          <strong>Definir a constituição</strong>
+          <div class="bloco-codigo"><pre><code data-comando>/speckit-constitution</code></pre> <button type="button" data-componente="copiar" aria-label="Copiar comando: /speckit-constitution" hidden>Copiar</button></div>
+        </li>
+        <li data-titulo="Especificar">
+          <strong>Especificar</strong>
+          <div class="bloco-codigo"><pre><code data-comando>/speckit-specify</code></pre> <button type="button" data-componente="copiar" aria-label="Copiar comando: /speckit-specify" hidden>Copiar</button></div>
+        </li>
+        <li data-titulo="Planejar">
+          <strong>Planejar</strong>
+          <div class="bloco-codigo"><pre><code data-comando>/speckit-plan</code></pre> <button type="button" data-componente="copiar" aria-label="Copiar comando: /speckit-plan" hidden>Copiar</button></div>
+        </li>
+        <li data-titulo="Gerar as tarefas">
+          <strong>Gerar as tarefas</strong>
+          <div class="bloco-codigo"><pre><code data-comando>/speckit-tasks</code></pre> <button type="button" data-componente="copiar" aria-label="Copiar comando: /speckit-tasks" hidden>Copiar</button></div>
+        </li>
+        <li data-titulo="Implementar">
+          <strong>Implementar</strong>
+          <div class="bloco-codigo"><pre><code data-comando>/speckit-implement</code></pre> <button type="button" data-componente="copiar" aria-label="Copiar comando: /speckit-implement" hidden>Copiar</button></div>
+        </li>
+        <li data-titulo="Convergir">
+          <strong>Convergir</strong>
+          <p>Repita implement e converge até a convergência.</p>
+          <div class="bloco-codigo"><pre><code data-comando>/speckit-converge</code></pre> <button type="button" data-componente="copiar" aria-label="Copiar comando: /speckit-converge" hidden>Copiar</button></div>
+        </li>
+      </ol>
+    </section>
+
+    <section aria-labelledby="sec-arvore">
+      <h2 id="sec-arvore">O que o projeto contém</h2>
+      <p>O projeto criado pelo <code>specify init</code> guarda os artefatos na pasta <code>.specify/</code>.</p>
+
+      <figure class="visual mockup">
+        <ul aria-label="Estrutura do projeto criado pelo Spec Kit">
+          <li><code>my-project/</code>
+            <ul>
+              <li><code>.specify/</code></li>
+            </ul>
+          </li>
+        </ul>
+        <figcaption>Ilustrativo: a pasta <code>.specify/</code> vem da fonte oficial; o conteúdo interno não é detalhado aqui.</figcaption>
+      </figure>
+    </section>
+
+    <section aria-labelledby="sec-extensoes">
+      <h2 id="sec-extensoes">Extensões opcionais</h2>
+      <p>A fonte oficial lista duas extensões opcionais, adicionadas com os comandos abaixo.</p>
+
+      <div class="bloco-codigo"><pre><code data-comando>specify extension add bug
+specify extension add assess</code></pre> <button type="button" data-componente="copiar" aria-label="Copiar comandos das extensões opcionais" hidden>Copiar</button></div>
+    </section>
+
+    <section aria-labelledby="sec-cartao">
+      <h2 id="sec-cartao">Cartão comparativo</h2>
+      <article style="--cor-ferramenta:#1f5f3a" data-ferramenta="spec-kit" class="cartao"><h3><img height="40" width="40" aria-hidden="true" alt="" src="../../assets/svg/spec-kit.svg"><span>GitHub Spec Kit</span></h3><p>Conduzir o SDD no chat do agente com constituição, especificação, plano, tarefas, implementação e convergência.</p><dl><dt>Instalação</dt><dd><code>uv tool install specify-cli</code></dd><dt>Agentes suportados</dt><dd>verificar na fonte</dd><dt>Artefatos principais</dt><dd><code>.specify/</code></dd><dt>Versão</dt><dd>versão não informada na fonte</dd><dt>Licença</dt><dd>MIT</dd><dt>Custo</dt><dd>verificar na fonte</dd><dt>Fonte oficial</dt><dd><a rel="noopener noreferrer" href="https://github.com/github/spec-kit">https://github.com/github/spec-kit</a></dd><dt>Data da consulta</dt><dd>14/11/2026</dd></dl></article>
+    </section>
+    <section class="concluir" aria-label="Conclusão da lição">
+      <button type="button" class="botao-concluir" data-componente="botao-concluir" data-licao="licao:spec-kit/tutorial" aria-pressed="false" disabled>Marcar como concluída</button>
+    </section>
+
+    <nav class="navegacao-licao" aria-label="Navegação entre lições">
+      <a rel="prev" href="index.html">&larr; Índice do módulo</a>
+      <a rel="next" href="exercicio.html">Próximo: Exercício &rarr;</a>
+    </nav>
+  </main>
+</body>
+</html>

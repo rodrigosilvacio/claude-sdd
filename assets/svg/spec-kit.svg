@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" role="img" aria-labelledby="t-spec-kit" fill="none" stroke="#1f5f3a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+  <title id="t-spec-kit">Ícone do Spec Kit</title>
+  <symbol id="icone-spec-kit" viewBox="0 0 48 48">
+    <rect x="3" y="3" width="42" height="42" rx="9" stroke="#1f5f3a"/>
+    <path d="M13 20h22v14H13z"/><path d="M19 20v-5h10v5M13 27h22"/>
+  </symbol>
+  <use href="#icone-spec-kit" width="48" height="48"/>
+</svg>

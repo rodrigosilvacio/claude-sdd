@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tutorial de AWS Kiro | Curso de Spec-Driven Development</title>
+  <meta name="description" content="Tutorial do AWS Kiro: specs com requirements.md, design.md e tasks.md, fluxos Requirements-First, Design-First e Quick Spec e execução em ondas paralelas.">
+  <link rel="stylesheet" href="../../assets/css/tokens.css">
+  <link rel="stylesheet" href="../../assets/css/base.css">
+  <link rel="stylesheet" href="../../assets/css/layout.css">
+  <link rel="stylesheet" href="../../assets/css/visuais.css">
+  <script type="module" src="../../assets/js/app.js"></script>
+</head>
+<body data-modulo="kiro">
+  <header>
+    <nav class="menu" data-componente="menu" aria-label="Principal">
+      <button type="button" class="menu-botao" aria-expanded="false" aria-controls="menu-lista">Menu</button>
+      <ul class="menu-lista" id="menu-lista">
+        <li><a href="../../index.html">Início</a></li>
+        <li><a href="../01-fundamentos/index.html" data-modulo="fundamentos">Fundamentos</a></li>
+        <li><a href="../02-openspec/index.html" data-modulo="openspec">OpenSpec</a></li>
+        <li><a href="../03-spec-kit/index.html" data-modulo="spec-kit">Spec Kit</a></li>
+        <li><a href="../04-bmad/index.html" data-modulo="bmad">BMAD</a></li>
+        <li><a href="../05-kiro/index.html" data-modulo="kiro">Kiro</a></li>
+        <li><a href="../06-gsd/index.html" data-modulo="gsd">GSD</a></li>
+        <li><a href="../07-spec-kitty/index.html" data-modulo="spec-kitty">Spec Kitty</a></li>
+        <li><a href="../08-specweave/index.html" data-modulo="specweave">SpecWeave</a></li>
+        <li><a href="../09-complementares/index.html" data-modulo="complementares">Complementares</a></li>
+        <li><a href="../../comparador.html">Comparador</a></li>
+        <li><a href="../../certificado.html">Certificado</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container" id="conteudo">
+    <h1>Tutorial de AWS Kiro</h1>
+    <p>O AWS Kiro trabalha com specs: arquivos que descrevem o que construir antes do código. Uma spec de feature gera <code>requirements.md</code>, <code>design.md</code> e <code>tasks.md</code>. Uma spec de bugfix usa <code>bugfix.md</code> no lugar de <code>requirements.md</code>. O Kiro está disponível em IDE, CLI, Web e Mobile.</p>
+    <p class="aviso"><strong>Projeto_Exemplo:</strong> este tutorial usa o projeto “Lista de Tarefas” como exemplo.</p>
+
+    <section aria-labelledby="sec-fontes">
+      <h2 id="sec-fontes">Fonte oficial e dados consultados</h2>
+      <ul>
+        <li>Fonte oficial: <a href="https://kiro.dev">kiro.dev</a> e <a href="https://kiro.dev/docs/specs/">documentação de specs</a>.</li>
+        <li>Data da consulta: 14/11/2026.</li>
+        <li>Versão: versão não informada na fonte.</li>
+        <li>Licença: verificar na fonte.</li>
+        <li>Preço do plano: verificar na fonte.</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="sec-ciclo">
+      <h2 id="sec-ciclo">O ciclo do Kiro</h2>
+      <p>O ciclo tem quatro etapas: requisitos, design, tarefas e execução. Na execução, as tarefas rodam em ondas paralelas, conforme as dependências entre elas.</p>
+
+      <figure class="visual diagrama" data-ferramenta="kiro">
+        <svg viewBox="0 0 800 100" role="img" aria-labelledby="df-titulo df-desc">
+          <title id="df-titulo">Ciclo do AWS Kiro</title>
+          <desc id="df-desc">Quatro etapas em sequência: 1 requisitos, 2 design, 3 tarefas e 4 execução em ondas paralelas.</desc>
+          <defs>
+            <marker id="df-seta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 z"/>
+            </marker>
+          </defs>
+          <g class="etapa" transform="translate(10,20)"><rect width="140" height="60" rx="8"/><text x="70" y="35">1. Requisitos</text></g>
+          <path class="seta" d="M154 50 H186" marker-end="url(#df-seta)"/>
+          <g class="etapa" transform="translate(190,20)"><rect width="140" height="60" rx="8"/><text x="70" y="35">2. Design</text></g>
+          <path class="seta" d="M334 50 H366" marker-end="url(#df-seta)"/>
+          <g class="etapa" transform="translate(370,20)"><rect width="140" height="60" rx="8"/><text x="70" y="35">3. Tarefas</text></g>
+          <path class="seta" d="M514 50 H546" marker-end="url(#df-seta)"/>
+          <g class="etapa" transform="translate(550,20)"><rect width="240" height="60" rx="8"/><text x="120" y="35">4. Execução em ondas paralelas</text></g>
+        </svg>
+        <figcaption>Ciclo do AWS Kiro: da spec à execução.</figcaption>
+        <ol class="alt-textual">
+          <li>Requisitos: arquivo <code>requirements.md</code> (ou <code>bugfix.md</code>).</li>
+          <li>Design: arquivo <code>design.md</code>.</li>
+          <li>Tarefas: arquivo <code>tasks.md</code>.</li>
+          <li>Execução em ondas paralelas, conforme as dependências.</li>
+        </ol>
+      </figure>
+    </section>
+
+    <section aria-labelledby="sec-linha">
+      <h2 id="sec-linha">Linha do tempo de uma spec</h2>
+      <p>Cada etapa deixa um registro que você pode revisar antes de seguir para a próxima.</p>
+      <ol class="linha-tempo" aria-label="Etapas de uma spec do AWS Kiro">
+        <li><strong>Requisitos</strong> Gera <code>requirements.md</code> (ou <code>bugfix.md</code>).</li>
+        <li><strong>Design</strong> Gera <code>design.md</code>.</li>
+        <li><strong>Tarefas</strong> Gera <code>tasks.md</code>.</li>
+        <li><strong>Execução em ondas paralelas</strong> As tarefas rodam conforme as dependências.</li>
+      </ol>
+    </section>
+
+    <section aria-labelledby="sec-fluxos">
+      <h2 id="sec-fluxos">Fluxos de spec</h2>
+      <p>Para features, o Kiro oferece dois fluxos: Requirements-First e Design-First. Há também o Quick Spec. Para correções de falhas, existem as specs de bugfix, que usam <code>bugfix.md</code>. No exercício, você compara o Design-First e o Quick Spec com o Requirements-First.</p>
+    </section>
+
+    <section aria-labelledby="sec-passos">
+      <h2 id="sec-passos">Passo a passo</h2>
+      <p>Use os botões Anterior e Próximo para percorrer os seis passos.</p>
+
+      <ol class="stepper" data-componente="stepper" aria-label="Passo a passo do AWS Kiro">
+        <li data-titulo="Instalar o CLI"><strong>Instalar o CLI</strong> Kiro também está disponível em IDE, Web e Mobile. Comando de instalação:
+          <div class="bloco-codigo">
+            <pre><code class="comando" id="cmd-instalar">curl -fsSL https://cli.kiro.dev/install | bash</code></pre>
+            <button type="button" data-componente="copiar" data-alvo="cmd-instalar" hidden disabled>Copiar comando</button>
+          </div>
+        </li>
+        <li data-titulo="Escolher o fluxo da spec"><strong>Escolher o fluxo da spec</strong> Requirements-First, Design-First ou Quick Spec; specs de bugfix usam <code>bugfix.md</code>.</li>
+        <li data-titulo="Gerar requirements.md"><strong>Gerar requirements.md</strong> Descreva o Projeto_Exemplo “Lista de Tarefas” e revise o arquivo.</li>
+        <li data-titulo="Gerar design.md"><strong>Gerar design.md</strong> Revise as decisões de design antes de seguir.</li>
+        <li data-titulo="Gerar tasks.md"><strong>Gerar tasks.md</strong> Confira a lista de tarefas gerada.</li>
+        <li data-titulo="Executar as tarefas"><strong>Executar as tarefas</strong> As tarefas rodam em ondas paralelas conforme as dependências.</li>
+      </ol>
+    </section>
+
+    <section aria-labelledby="sec-estrutura">
+      <h2 id="sec-estrutura">Estrutura de arquivos de uma spec</h2>
+      <p>Uma spec de feature gera estes três arquivos.</p>
+
+      <figure class="visual mockup">
+        <ul aria-label="Estrutura de pastas e arquivos de uma spec do AWS Kiro">
+          <li><code>spec/</code>
+            <ul>
+              <li><code>requirements.md</code></li>
+              <li><code>design.md</code></li>
+              <li><code>tasks.md</code></li>
+            </ul>
+          </li>
+        </ul>
+        <figcaption><span class="selo">Ilustrativo</span> Os nomes dos arquivos vêm da <a href="https://kiro.dev/docs/specs/">fonte oficial</a>; a pasta externa é genérica.</figcaption>
+      </figure>
+    </section>
+
+    <section aria-labelledby="sec-cartao">
+      <h2 id="sec-cartao">Cartão comparativo</h2>
+      <article style="--cor-ferramenta:#5b3b9a" data-ferramenta="kiro" class="cartao"><h3><img height="40" width="40" aria-hidden="true" alt="" src="../../assets/svg/kiro.svg"><span>AWS Kiro</span></h3><p>Specs com requirements.md (ou bugfix.md), design.md e tasks.md, em IDE, CLI, Web e Mobile.</p><dl><dt>Instalação</dt><dd><code>curl -fsSL https://cli.kiro.dev/install | bash</code></dd><dt>Agentes suportados</dt><dd>verificar na fonte</dd><dt>Artefatos principais</dt><dd><code>requirements.md</code>, <code>bugfix.md</code>, <code>design.md</code>, <code>tasks.md</code></dd><dt>Versão</dt><dd>versão não informada na fonte</dd><dt>Licença</dt><dd>verificar na fonte</dd><dt>Custo</dt><dd>verificar na fonte</dd><dt>Fonte oficial</dt><dd><a rel="noopener noreferrer" href="https://kiro.dev">https://kiro.dev</a></dd><dt>Data da consulta</dt><dd>14/11/2026</dd></dl></article>
+    </section>
+    <section class="concluir" aria-label="Conclusão da lição">
+      <button type="button" class="botao-concluir" data-componente="botao-concluir" data-licao="licao:kiro/tutorial" aria-pressed="false" disabled>Marcar como concluída</button>
+    </section>
+
+    <nav class="navegacao-licao" aria-label="Navegação entre lições">
+      <a rel="prev" href="index.html">&larr; Índice do módulo</a>
+      <a rel="next" href="exercicio.html">Próximo: Exercício de AWS Kiro &rarr;</a>
+    </nav>
+  </main>
+</body>
+</html>

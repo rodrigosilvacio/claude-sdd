@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" role="img" aria-labelledby="t-openspec" fill="none" stroke="#0b4f9c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+  <title id="t-openspec">Ícone do OpenSpec</title>
+  <symbol id="icone-openspec" viewBox="0 0 48 48">
+    <rect x="3" y="3" width="42" height="42" rx="9" stroke="#0b4f9c"/>
+    <path d="M14 12h20v24H14z"/><path d="M19 20h10M19 26h10M19 32h6"/>
+  </symbol>
+  <use href="#icone-openspec" width="48" height="48"/>
+</svg>

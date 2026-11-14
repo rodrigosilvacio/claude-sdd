@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Exercício de SpecWeave | Curso de Spec-Driven Development</title>
+  <meta name="description" content="Exercício do SpecWeave: ordene as etapas do ciclo e marque o checklist com o Projeto_Exemplo Lista de Tarefas.">
+  <link rel="stylesheet" href="../../assets/css/tokens.css">
+  <link rel="stylesheet" href="../../assets/css/base.css">
+  <link rel="stylesheet" href="../../assets/css/layout.css">
+  <link rel="stylesheet" href="../../assets/css/visuais.css">
+  <script type="module" src="../../assets/js/app.js"></script>
+</head>
+<body data-modulo="specweave">
+  <header>
+    <nav class="menu" data-componente="menu" aria-label="Principal">
+      <button type="button" class="menu-botao" aria-expanded="false" aria-controls="menu-lista">Menu</button>
+      <ul class="menu-lista" id="menu-lista">
+        <li><a href="../../index.html">Início</a></li>
+        <li><a href="../01-fundamentos/index.html" data-modulo="fundamentos">Fundamentos</a></li>
+        <li><a href="../02-openspec/index.html" data-modulo="openspec">OpenSpec</a></li>
+        <li><a href="../03-spec-kit/index.html" data-modulo="spec-kit">Spec Kit</a></li>
+        <li><a href="../04-bmad/index.html" data-modulo="bmad">BMAD</a></li>
+        <li><a href="../05-kiro/index.html" data-modulo="kiro">Kiro</a></li>
+        <li><a href="../06-gsd/index.html" data-modulo="gsd">GSD</a></li>
+        <li><a href="../07-spec-kitty/index.html" data-modulo="spec-kitty">Spec Kitty</a></li>
+        <li><a href="../08-specweave/index.html" data-modulo="specweave">SpecWeave</a></li>
+        <li><a href="../09-complementares/index.html" data-modulo="complementares">Complementares</a></li>
+        <li><a href="../../comparador.html">Comparador</a></li>
+        <li><a href="../../certificado.html">Certificado</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container" id="conteudo">
+    <h1>Exercício de SpecWeave</h1>
+    <p>Aplique o que viu no tutorial ao Projeto_Exemplo “Lista de Tarefas”. Primeiro ordene as etapas do ciclo do SpecWeave. Depois percorra o checklist; o exercício conta como concluído quando todos os itens estiverem marcados.</p>
+
+    <section aria-labelledby="sec-ordenar">
+      <h2 id="sec-ordenar">Ordene as etapas do ciclo</h2>
+      <p>Use os botões Subir e Descer para colocar as etapas na ordem do ciclo do SpecWeave e clique em Verificar ordem.</p>
+      <div class="atividade" data-componente="ordenar" data-canonica="claim,done,handoff,pickup,verify,review,complete">
+        <ol aria-label="Etapas do ciclo do SpecWeave fora de ordem">
+          <li data-id="handoff">Passar o bastão</li>
+          <li data-id="complete">Completar</li>
+          <li data-id="claim">Assumir tarefa</li>
+          <li data-id="review">Revisar</li>
+          <li data-id="done">Concluir tarefa</li>
+          <li data-id="verify">Verificar</li>
+          <li data-id="pickup">Retomar</li>
+        </ol>
+      </div>
+    </section>
+
+    <section aria-labelledby="sec-checklist">
+      <h2 id="sec-checklist">Checklist</h2>
+      <p>Marque cada item conforme o conclui. O estado fica salvo neste navegador.</p>
+      <ul class="checklist" data-componente="checklist" data-ferramenta="specweave">
+        <li><input type="checkbox" id="chk-specweave-1" data-item="specweave/c1"> <label for="chk-specweave-1">Instalar o CLI com <code>npm install -g specweave</code>.</label></li>
+        <li><input type="checkbox" id="chk-specweave-2" data-item="specweave/c2"> <label for="chk-specweave-2">Executar <code>specweave init</code> na pasta do Projeto_Exemplo.</label></li>
+        <li><input type="checkbox" id="chk-specweave-3" data-item="specweave/c3"> <label for="chk-specweave-3">Criar um incremento com <code>specweave create-increment "&lt;título&gt;"</code>.</label></li>
+        <li><input type="checkbox" id="chk-specweave-4" data-item="specweave/c4"> <label for="chk-specweave-4">Marcar ao menos um critério <code>AC-01</code> em <code>spec.md</code>.</label></li>
+        <li><input type="checkbox" id="chk-specweave-5" data-item="specweave/c5"> <label for="chk-specweave-5">Registrar uma tarefa com <code>specweave task claim T-01</code> e <code>specweave task done T-01 --run "npm test"</code>.</label></li>
+        <li><input type="checkbox" id="chk-specweave-6" data-item="specweave/c6"> <label for="chk-specweave-6">Fechar o incremento com <code>specweave verify</code> e <code>specweave complete</code>.</label></li>
+      </ul>
+    </section>
+
+    <nav class="navegacao-licao" aria-label="Navegação entre lições">
+      <a rel="prev" href="tutorial.html">&larr; Anterior: Tutorial de SpecWeave</a>
+      <a rel="next" href="quiz.html">Próximo: Quiz de SpecWeave &rarr;</a>
+    </nav>
+  </main>
+</body>
+</html>

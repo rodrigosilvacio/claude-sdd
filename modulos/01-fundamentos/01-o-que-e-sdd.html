@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>O que é SDD | Curso de Spec-Driven Development</title>
+  <meta name="description" content="Conceito de Spec-Driven Development, o fluxo requisitos, design, tarefas e implementação, e a diferença para o desenvolvimento guiado apenas por prompts.">
+  <link rel="stylesheet" href="../../assets/css/tokens.css">
+  <link rel="stylesheet" href="../../assets/css/base.css">
+  <link rel="stylesheet" href="../../assets/css/layout.css">
+  <link rel="stylesheet" href="../../assets/css/visuais.css">
+  <script type="module" src="../../assets/js/app.js"></script>
+</head>
+<body data-modulo="fundamentos">
+  <header>
+    <nav class="menu" data-componente="menu" aria-label="Principal">
+      <button type="button" class="menu-botao" aria-expanded="false" aria-controls="menu-lista">Menu</button>
+      <ul class="menu-lista" id="menu-lista">
+        <li><a href="../../index.html">Início</a></li>
+        <li><a href="../01-fundamentos/index.html" data-modulo="fundamentos">Fundamentos</a></li>
+        <li><a href="../02-openspec/index.html" data-modulo="openspec">OpenSpec</a></li>
+        <li><a href="../03-spec-kit/index.html" data-modulo="spec-kit">Spec Kit</a></li>
+        <li><a href="../04-bmad/index.html" data-modulo="bmad">BMAD</a></li>
+        <li><a href="../05-kiro/index.html" data-modulo="kiro">Kiro</a></li>
+        <li><a href="../06-gsd/index.html" data-modulo="gsd">GSD</a></li>
+        <li><a href="../07-spec-kitty/index.html" data-modulo="spec-kitty">Spec Kitty</a></li>
+        <li><a href="../08-specweave/index.html" data-modulo="specweave">SpecWeave</a></li>
+        <li><a href="../09-complementares/index.html" data-modulo="complementares">Complementares</a></li>
+        <li><a href="../../comparador.html">Comparador</a></li>
+        <li><a href="../../certificado.html">Certificado</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container" id="conteudo">
+    <h1>O que é SDD</h1>
+    <p>Spec-Driven Development (SDD) é uma abordagem de desenvolvimento em que a especificação orienta a implementação. Em vez de começar pelo código, você registra por escrito o que o software deve fazer, como ele será construído e quais tarefas levam até ele. Uma pessoa ou um agente de IA usa esses registros como guia.</p>
+
+    <section aria-labelledby="sec-fluxo">
+      <h2 id="sec-fluxo">O fluxo do SDD</h2>
+      <p>O fluxo do curso tem quatro etapas, nesta ordem: requisitos, design, tarefas e implementação. Os requisitos dizem o que o software deve fazer. O design descreve como isso será construído. As tarefas dividem o trabalho em passos pequenos. A implementação executa essas tarefas. Cada etapa produz um registro escrito que a etapa seguinte usa.</p>
+
+      <figure class="visual diagrama">
+        <svg viewBox="0 0 740 100" role="img" aria-labelledby="df-titulo df-desc">
+          <title id="df-titulo">Fluxo do SDD</title>
+          <desc id="df-desc">Quatro etapas em sequência: 1 requisitos, 2 design, 3 tarefas e 4 implementação.</desc>
+          <defs>
+            <marker id="df-seta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 z"/>
+            </marker>
+          </defs>
+          <g class="etapa" transform="translate(10,20)"><rect width="150" height="60" rx="8"/><text x="75" y="35">1. Requisitos</text></g>
+          <path class="seta" d="M164 50 H196" marker-end="url(#df-seta)"/>
+          <g class="etapa" transform="translate(200,20)"><rect width="150" height="60" rx="8"/><text x="75" y="35">2. Design</text></g>
+          <path class="seta" d="M354 50 H386" marker-end="url(#df-seta)"/>
+          <g class="etapa" transform="translate(390,20)"><rect width="150" height="60" rx="8"/><text x="75" y="35">3. Tarefas</text></g>
+          <path class="seta" d="M544 50 H576" marker-end="url(#df-seta)"/>
+          <g class="etapa" transform="translate(580,20)"><rect width="150" height="60" rx="8"/><text x="75" y="35">4. Implementação</text></g>
+        </svg>
+        <figcaption>Fluxo do SDD: da especificação ao código.</figcaption>
+        <ol class="alt-textual">
+          <li>Requisitos: o que o software deve fazer.</li>
+          <li>Design: como o software será construído.</li>
+          <li>Tarefas: passos pequenos, em ordem.</li>
+          <li>Implementação: execução das tarefas.</li>
+        </ol>
+      </figure>
+    </section>
+
+    <section aria-labelledby="sec-etapas">
+      <h2 id="sec-etapas">O que cada etapa produz</h2>
+      <p>Cada etapa deixa um artefato que pode ser lido, revisado e corrigido antes de seguir. É isso que dá controle ao processo: um erro de entendimento aparece nos requisitos, e não só no código pronto.</p>
+
+      <ol class="linha-tempo" aria-label="Artefatos produzidos em cada etapa do SDD">
+        <li><strong>Requisitos</strong> Frases verificáveis sobre o que o software deve fazer.</li>
+        <li><strong>Design</strong> Decisões sobre como a solução será construída.</li>
+        <li><strong>Tarefas</strong> Lista de passos pequenos, na ordem de execução.</li>
+        <li><strong>Implementação</strong> Código escrito tendo a especificação como referência.</li>
+      </ol>
+    </section>
+
+    <section aria-labelledby="sec-arquivos">
+      <h2 id="sec-arquivos">Como isso aparece em arquivos</h2>
+      <p>Cada ferramenta guarda esses registros de um jeito. No AWS Kiro, uma spec gera os arquivos <code>requirements.md</code> (ou <code>bugfix.md</code>, em correções de falhas), <code>design.md</code> e <code>tasks.md</code>. As outras ferramentas do curso usam outras pastas e outros nomes, que você vê nos tutoriais.</p>
+
+      <figure class="visual mockup">
+        <ul aria-label="Estrutura de pastas e arquivos de uma spec do AWS Kiro">
+          <li><code>nome-da-spec/</code>
+            <ul>
+              <li><code>requirements.md</code> (requisitos)</li>
+              <li><code>design.md</code> (design)</li>
+              <li><code>tasks.md</code> (tarefas)</li>
+            </ul>
+          </li>
+        </ul>
+        <figcaption>Ilustrativo: os três nomes de arquivo vêm da fonte oficial do <a href="https://kiro.dev/docs/specs/">AWS Kiro</a>; a pasta externa é genérica.</figcaption>
+      </figure>
+    </section>
+
+    <section aria-labelledby="sec-prompts">
+      <h2 id="sec-prompts">SDD e desenvolvimento guiado apenas por prompts</h2>
+      <p>Nos dois casos você conversa com um agente de IA. A diferença está no que guia o trabalho: no SDD, a especificação escrita; no desenvolvimento guiado apenas por prompts, a conversa em andamento.</p>
+
+      <div class="tabela-rolagem" role="region" aria-label="Tabela comparando SDD e desenvolvimento guiado apenas por prompts" tabindex="0">
+        <table>
+          <caption>SDD comparado ao desenvolvimento guiado apenas por prompts</caption>
+          <thead>
+            <tr><th scope="col">Aspecto</th><th scope="col">SDD</th><th scope="col">Apenas prompts</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Ponto de partida</th><td>Especificação escrita: requisitos, design e tarefas.</td><td>Pedido feito em uma conversa.</td></tr>
+            <tr><th scope="row">Registro das decisões</th><td>Artefatos de especificação guardados no projeto.</td><td>Mensagens espalhadas pela conversa.</td></tr>
+            <tr><th scope="row">O que orienta o agente</th><td>A especificação.</td><td>O último prompt e o contexto da conversa.</td></tr>
+            <tr><th scope="row">Conferência do resultado</th><td>Compara o código com requisitos e tarefas.</td><td>Depende da memória de quem conduz a conversa.</td></tr>
+            <tr><th scope="row">Retomada do trabalho</th><td>Lê-se a especificação.</td><td>Relê-se a conversa.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section aria-labelledby="sec-exemplo">
+      <h2 id="sec-exemplo">Exemplo de especificação em texto</h2>
+      <p>Veja uma especificação curta para o Projeto_Exemplo do curso, uma lista de tarefas. Cada requisito é uma frase verificável, e cada cenário diz o que acontece em uma situação concreta.</p>
+
+      <figure class="visual">
+        <pre role="region" aria-label="Exemplo de especificação em texto" tabindex="0">Requisito: Adicionar tarefa
+O sistema DEVE permitir que a pessoa adicione uma tarefa com um título.
+
+Cenário: Título válido
+  QUANDO a pessoa informa o título "Comprar pão" e confirma
+  ENTÃO a tarefa aparece na lista como pendente
+
+Cenário: Título vazio
+  QUANDO a pessoa confirma sem informar o título
+  ENTÃO o sistema mostra uma mensagem de erro e não cria a tarefa</pre>
+        <figcaption>Ilustrativo: exemplo de especificação em texto. Cada ferramenta tem o seu próprio formato.</figcaption>
+      </figure>
+    </section>
+
+    <section class="concluir" aria-label="Conclusão da lição">
+      <button type="button" class="botao-concluir" data-componente="botao-concluir" data-licao="licao:fundamentos/o-que-e-sdd" aria-pressed="false" disabled>Marcar como concluída</button>
+    </section>
+
+    <nav class="navegacao-licao" aria-label="Navegação entre lições">
+      <a rel="prev" href="index.html">&larr; Índice do módulo</a>
+      <a rel="next" href="02-projeto-exemplo.html">Próxima: Projeto de exemplo &rarr;</a>
+    </nav>
+  </main>
+</body>
+</html>

@@ -1,0 +1,16 @@
+{
+  "name": "comparacoes-sdds",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test tests/",
+    "lint:conteudo": "node tools/verificar-conteudo.mjs",
+    "lint:orcamento": "node tools/verificar-orcamento.mjs",
+    "lint:links": "node tools/verificar-links.mjs",
+    "lint:links:externos": "node tools/verificar-links.mjs --externos"
+  },
+  "devDependencies": {
+    "fast-check": "^3.23.0",
+    "linkedom": "^0.18.0"
+  }
+}

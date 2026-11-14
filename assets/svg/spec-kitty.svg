@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" role="img" aria-labelledby="t-spec-kitty" fill="none" stroke="#0b6e4f" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+  <title id="t-spec-kitty">Ícone do Spec Kitty</title>
+  <symbol id="icone-spec-kitty" viewBox="0 0 48 48">
+    <rect x="3" y="3" width="42" height="42" rx="9" stroke="#0b6e4f"/>
+    <path d="M13 35V16l6 5h10l6-5v19z"/><path d="M20 28h.01M28 28h.01"/>
+  </symbol>
+  <use href="#icone-spec-kitty" width="48" height="48"/>
+</svg>

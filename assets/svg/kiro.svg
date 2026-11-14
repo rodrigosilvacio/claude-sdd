@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" role="img" aria-labelledby="t-kiro" fill="none" stroke="#5b3b9a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+  <title id="t-kiro">Ícone do Kiro</title>
+  <symbol id="icone-kiro" viewBox="0 0 48 48">
+    <rect x="3" y="3" width="42" height="42" rx="9" stroke="#5b3b9a"/>
+    <path d="M15 34V14M15 25l14-11M15 25l14 11"/>
+  </symbol>
+  <use href="#icone-kiro" width="48" height="48"/>
+</svg>

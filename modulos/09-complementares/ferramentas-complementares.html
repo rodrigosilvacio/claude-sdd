@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ferramentas complementares de planejamento e orquestração | Curso de Spec-Driven Development</title>
+  <meta name="description" content="Lição sobre produtos relacionados ao Spec Kitty e ao SpecWeave, com finalidade, relação com as ferramentas de SDD e link oficial.">
+  <link rel="stylesheet" href="../../assets/css/tokens.css">
+  <link rel="stylesheet" href="../../assets/css/base.css">
+  <link rel="stylesheet" href="../../assets/css/layout.css">
+  <link rel="stylesheet" href="../../assets/css/visuais.css">
+  <script type="module" src="../../assets/js/app.js"></script>
+</head>
+<body data-modulo="complementares">
+  <header>
+    <nav class="menu" data-componente="menu" aria-label="Principal">
+      <button type="button" class="menu-botao" aria-expanded="false" aria-controls="menu-lista">Menu</button>
+      <ul class="menu-lista" id="menu-lista">
+        <li><a href="../../index.html">Início</a></li>
+        <li><a href="../01-fundamentos/index.html" data-modulo="fundamentos">Fundamentos</a></li>
+        <li><a href="../02-openspec/index.html" data-modulo="openspec">OpenSpec</a></li>
+        <li><a href="../03-spec-kit/index.html" data-modulo="spec-kit">Spec Kit</a></li>
+        <li><a href="../04-bmad/index.html" data-modulo="bmad">BMAD</a></li>
+        <li><a href="../05-kiro/index.html" data-modulo="kiro">Kiro</a></li>
+        <li><a href="../06-gsd/index.html" data-modulo="gsd">GSD</a></li>
+        <li><a href="../07-spec-kitty/index.html" data-modulo="spec-kitty">Spec Kitty</a></li>
+        <li><a href="../08-specweave/index.html" data-modulo="specweave">SpecWeave</a></li>
+        <li><a href="../09-complementares/index.html" data-modulo="complementares">Complementares</a></li>
+        <li><a href="../../comparador.html">Comparador</a></li>
+        <li><a href="../../certificado.html">Certificado</a></li>
+      </ul>
+    </nav>
+  </header>
+
+
+  <main class="container" id="conteudo">
+    <h1>Ferramentas complementares de planejamento e orquestração</h1>
+    <p>Além das sete ferramentas de SDD do curso, as fontes oficiais citam produtos relacionados. Esta lição apresenta os que constam nessas fontes: dois ligados ao Spec Kitty e dois ligados ao SpecWeave. Para cada um, você vê a finalidade, um caso de uso e a relação com as ferramentas do curso, com o link oficial.</p>
+
+    <section aria-labelledby="sec-mapa">
+      <h2 id="sec-mapa">Onde os produtos se encaixam</h2>
+      <p>Spec Kitty e SpecWeave são ferramentas do curso e têm tutorial próprio. Os produtos desta lição ficam ao lado delas: são relacionados, mas não fazem parte dos tutoriais. Spec Kitty organiza o trabalho em work packages, cada um em seu próprio git worktree. SpecWeave organiza o trabalho em increments, com tarefas e verificação.</p>
+
+      <figure class="visual diagrama">
+        <svg viewBox="0 0 740 190" role="img" aria-labelledby="dm-titulo dm-desc">
+          <title id="dm-titulo">Produtos relacionados às ferramentas do curso</title>
+          <desc id="dm-desc">Spec Kitty se relaciona com Brain Kitty e Team Kitty. SpecWeave se relaciona com SpecWithCode e Verified Skill.</desc>
+          <defs>
+            <marker id="dm-seta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 z"/>
+            </marker>
+          </defs>
+          <g class="etapa" transform="translate(10,10)"><rect width="150" height="50" rx="8"/><text x="75" y="30">Spec Kitty</text></g>
+          <g class="etapa" transform="translate(390,10)"><rect width="150" height="50" rx="8"/><text x="75" y="30">SpecWeave</text></g>
+          <path class="seta" d="M60 64 V116" marker-end="url(#dm-seta)"/>
+          <path class="seta" d="M110 64 V116" marker-end="url(#dm-seta)"/>
+          <path class="seta" d="M440 64 V116" marker-end="url(#dm-seta)"/>
+          <path class="seta" d="M490 64 V116" marker-end="url(#dm-seta)"/>
+          <g class="etapa" transform="translate(10,120)"><rect width="150" height="50" rx="8"/><text x="75" y="30">Brain Kitty</text></g>
+          <g class="etapa" transform="translate(180,120)"><rect width="150" height="50" rx="8"/><text x="75" y="30">Team Kitty</text></g>
+          <g class="etapa" transform="translate(390,120)"><rect width="150" height="50" rx="8"/><text x="75" y="30">SpecWithCode</text></g>
+          <g class="etapa" transform="translate(560,120)"><rect width="150" height="50" rx="8"/><text x="75" y="30">Verified Skill</text></g>
+        </svg>
+        <figcaption>Cada produto relacionado aparece abaixo da ferramenta do curso à qual a fonte oficial o associa.</figcaption>
+        <ol class="alt-textual">
+          <li>Spec Kitty: ferramenta do curso.</li>
+          <li>SpecWeave: ferramenta do curso.</li>
+          <li>Brain Kitty: relacionado ao Spec Kitty.</li>
+          <li>Team Kitty: relacionado ao Spec Kitty.</li>
+          <li>SpecWithCode: relacionado ao SpecWeave.</li>
+          <li>Verified Skill: relacionado ao SpecWeave.</li>
+        </ol>
+      </figure>
+    </section>
+
+    <section aria-labelledby="sec-spec-kitty">
+      <h2 id="sec-spec-kitty">Produtos relacionados ao Spec Kitty</h2>
+      <p>Brain Kitty e Team Kitty são produtos separados do CLI do Spec Kitty. A fonte oficial os apresenta com contato e acesso antecipado. Por isso o tutorial do Spec Kitty não os usa. Como caso de uso, quem quiser ir além do CLI gratuito consulta a página oficial para saber o que cada produto oferece, já que a fonte consultada não detalha as funções deles.</p>
+
+      <ul aria-label="Produtos relacionados ao Spec Kitty">
+        <li><strong>Brain Kitty</strong> Produto separado do CLI. Fonte oficial: <a href="https://spec-kitty.ai">spec-kitty.ai</a> (consultada em 14/11/2026).</li>
+        <li><strong>Team Kitty</strong> Produto separado do CLI. Fonte oficial: <a href="https://spec-kitty.ai">spec-kitty.ai</a> (consultada em 14/11/2026).</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="sec-specweave">
+      <h2 id="sec-specweave">Produtos relacionados ao SpecWeave</h2>
+      <p>SpecWithCode é um aplicativo, e Verified Skill é outro produto relacionado. Ambos ficam fora do tutorial principal do SpecWeave. Como caso de uso, depois de dominar o fluxo do CLI com <code>specweave init</code> e <code>specweave create-increment</code>, você pode consultar a página oficial para avaliar esses produtos. A fonte consultada não detalha as funções deles.</p>
+
+      <ul aria-label="Produtos relacionados ao SpecWeave">
+        <li><strong>SpecWithCode</strong> Aplicativo relacionado. Fonte oficial: <a href="https://spec-weave.com">spec-weave.com</a> (consultada em 14/11/2026).</li>
+        <li><strong>Verified Skill</strong> Produto relacionado. Fonte oficial: <a href="https://spec-weave.com">spec-weave.com</a> (consultada em 14/11/2026).</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="sec-tabela">
+      <h2 id="sec-tabela">Tabela comparativa</h2>
+      <p>A tabela resume cada produto, com uma linha por ferramenta complementar. Onde a fonte consultada não informa algo, a célula diz “verificar na fonte”.</p>
+
+      <div class="tabela-rolagem" role="region" aria-label="Tabela comparativa das ferramentas complementares" tabindex="0">
+        <table>
+          <caption>Ferramentas complementares e sua relação com as ferramentas de SDD</caption>
+          <thead>
+            <tr><th scope="col">Produto</th><th scope="col">Tipo</th><th scope="col">Relação com as ferramentas de SDD</th><th scope="col">Funções detalhadas</th><th scope="col">Link oficial</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Brain Kitty</th><td>Produto separado (contato e acesso antecipado)</td><td>Relacionado ao Spec Kitty; fora do tutorial</td><td>Verificar na fonte</td><td><a href="https://spec-kitty.ai">spec-kitty.ai</a></td></tr>
+            <tr><th scope="row">Team Kitty</th><td>Produto separado (contato e acesso antecipado)</td><td>Relacionado ao Spec Kitty; fora do tutorial</td><td>Verificar na fonte</td><td><a href="https://spec-kitty.ai">spec-kitty.ai</a></td></tr>
+            <tr><th scope="row">SpecWithCode</th><td>Aplicativo</td><td>Relacionado ao SpecWeave; fora do tutorial principal</td><td>Verificar na fonte</td><td><a href="https://spec-weave.com">spec-weave.com</a></td></tr>
+            <tr><th scope="row">Verified Skill</th><td>Produto relacionado</td><td>Relacionado ao SpecWeave; fora do tutorial principal</td><td>Verificar na fonte</td><td><a href="https://spec-weave.com">spec-weave.com</a></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="concluir" aria-label="Conclusão da lição">
+      <button type="button" class="botao-concluir" data-componente="botao-concluir" data-licao="licao:complementares/ferramentas-complementares" aria-pressed="false" disabled>Marcar como concluída</button>
+    </section>
+
+    <nav class="navegacao-licao" aria-label="Navegação entre lições">
+      <a rel="prev" href="index.html">&larr; Índice do módulo</a>
+      <a rel="next" href="quiz.html">Próximo: Quiz de ferramentas complementares &rarr;</a>
+    </nav>
+  </main>
+</body>
+</html>

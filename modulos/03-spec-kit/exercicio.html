@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Exercício de GitHub Spec Kit | Curso de Spec-Driven Development</title>
+  <meta name="description" content="Exercício do GitHub Spec Kit: ordene as etapas do fluxo e conclua o checklist sobre o Projeto_Exemplo.">
+  <link rel="stylesheet" href="../../assets/css/tokens.css">
+  <link rel="stylesheet" href="../../assets/css/base.css">
+  <link rel="stylesheet" href="../../assets/css/layout.css">
+  <link rel="stylesheet" href="../../assets/css/visuais.css">
+  <script type="module" src="../../assets/js/app.js"></script>
+</head>
+<body data-modulo="spec-kit">
+  <header>
+    <nav class="menu" data-componente="menu" aria-label="Principal">
+      <button type="button" class="menu-botao" aria-expanded="false" aria-controls="menu-lista">Menu</button>
+      <ul class="menu-lista" id="menu-lista">
+        <li><a href="../../index.html">Início</a></li>
+        <li><a href="../01-fundamentos/index.html" data-modulo="fundamentos">Fundamentos</a></li>
+        <li><a href="../02-openspec/index.html" data-modulo="openspec">OpenSpec</a></li>
+        <li><a href="../03-spec-kit/index.html" data-modulo="spec-kit">Spec Kit</a></li>
+        <li><a href="../04-bmad/index.html" data-modulo="bmad">BMAD</a></li>
+        <li><a href="../05-kiro/index.html" data-modulo="kiro">Kiro</a></li>
+        <li><a href="../06-gsd/index.html" data-modulo="gsd">GSD</a></li>
+        <li><a href="../07-spec-kitty/index.html" data-modulo="spec-kitty">Spec Kitty</a></li>
+        <li><a href="../08-specweave/index.html" data-modulo="specweave">SpecWeave</a></li>
+        <li><a href="../09-complementares/index.html" data-modulo="complementares">Complementares</a></li>
+        <li><a href="../../comparador.html">Comparador</a></li>
+        <li><a href="../../certificado.html">Certificado</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container" id="conteudo">
+    <h1>Exercício de GitHub Spec Kit</h1>
+    <p>Pratique o fluxo do GitHub Spec Kit sobre o Projeto_Exemplo, a <strong>Lista de Tarefas</strong>. Primeiro ordene as etapas do fluxo; depois siga o checklist no seu computador. O exercício conta como concluído quando todos os itens estiverem marcados.</p>
+
+    <section aria-labelledby="sec-ordenar">
+      <h2 id="sec-ordenar">Ordene as etapas do fluxo</h2>
+      <p>Use os botões Subir e Descer para colocar as etapas na ordem em que os comandos são executados no chat do agente, e depois use Verificar ordem.</p>
+
+      <div class="visual atividade" data-componente="ordenar" data-canonica="constitution,specify,plan,tasks,implement,converge">
+        <ol>
+          <li data-id="plan">/speckit-plan</li>
+          <li data-id="converge">/speckit-converge</li>
+          <li data-id="constitution">/speckit-constitution</li>
+          <li data-id="tasks">/speckit-tasks</li>
+          <li data-id="specify">/speckit-specify</li>
+          <li data-id="implement">/speckit-implement</li>
+        </ol>
+      </div>
+    </section>
+
+    <section aria-labelledby="sec-checklist">
+      <h2 id="sec-checklist">Checklist</h2>
+      <p>Marque cada item depois de executá-lo. Sua marcação fica salva neste navegador.</p>
+
+      <ul class="checklist" data-componente="checklist" data-ferramenta="spec-kit">
+        <li><input type="checkbox" id="chk-spec-kit-1" data-item="spec-kit/c1"> <label for="chk-spec-kit-1">Confirmar Python 3.11+ e <code>uv</code> e instalar com <code>uv tool install specify-cli</code>.</label></li>
+        <li><input type="checkbox" id="chk-spec-kit-2" data-item="spec-kit/c2"> <label for="chk-spec-kit-2">Criar o projeto com <code>specify init my-project --integration copilot</code>.</label></li>
+        <li><input type="checkbox" id="chk-spec-kit-3" data-item="spec-kit/c3"> <label for="chk-spec-kit-3">Conferir a pasta <code>.specify/</code> criada no projeto.</label></li>
+        <li><input type="checkbox" id="chk-spec-kit-4" data-item="spec-kit/c4"> <label for="chk-spec-kit-4">No chat do agente, executar <code>/speckit-constitution</code> e <code>/speckit-specify</code> sobre o Projeto_Exemplo.</label></li>
+        <li><input type="checkbox" id="chk-spec-kit-5" data-item="spec-kit/c5"> <label for="chk-spec-kit-5">Executar <code>/speckit-plan</code> e <code>/speckit-tasks</code> para gerar plano e tarefas.</label></li>
+        <li><input type="checkbox" id="chk-spec-kit-6" data-item="spec-kit/c6"> <label for="chk-spec-kit-6">Executar <code>/speckit-implement</code> e <code>/speckit-converge</code>, repetindo até a convergência.</label></li>
+      </ul>
+    </section>
+
+    <nav class="navegacao-licao" aria-label="Navegação entre lições">
+      <a rel="prev" href="tutorial.html">&larr; Anterior: Tutorial</a>
+      <a rel="next" href="quiz.html">Próximo: Quiz &rarr;</a>
+    </nav>
+  </main>
+</body>
+</html>

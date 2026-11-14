@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tutorial de Spec Kitty | Curso de Spec-Driven Development</title>
+  <meta name="description" content="Tutorial do Spec Kitty: instalação com pipx, init com --ai e ciclo de sete etapas com um git worktree por work package.">
+  <link rel="stylesheet" href="../../assets/css/tokens.css">
+  <link rel="stylesheet" href="../../assets/css/base.css">
+  <link rel="stylesheet" href="../../assets/css/layout.css">
+  <link rel="stylesheet" href="../../assets/css/visuais.css">
+  <script type="module" src="../../assets/js/app.js"></script>
+</head>
+<body data-modulo="spec-kitty">
+  <header>
+    <nav class="menu" data-componente="menu" aria-label="Principal">
+      <button type="button" class="menu-botao" aria-expanded="false" aria-controls="menu-lista">Menu</button>
+      <ul class="menu-lista" id="menu-lista">
+        <li><a href="../../index.html">Início</a></li>
+        <li><a href="../01-fundamentos/index.html" data-modulo="fundamentos">Fundamentos</a></li>
+        <li><a href="../02-openspec/index.html" data-modulo="openspec">OpenSpec</a></li>
+        <li><a href="../03-spec-kit/index.html" data-modulo="spec-kit">Spec Kit</a></li>
+        <li><a href="../04-bmad/index.html" data-modulo="bmad">BMAD</a></li>
+        <li><a href="../05-kiro/index.html" data-modulo="kiro">Kiro</a></li>
+        <li><a href="../06-gsd/index.html" data-modulo="gsd">GSD</a></li>
+        <li><a href="../07-spec-kitty/index.html" data-modulo="spec-kitty">Spec Kitty</a></li>
+        <li><a href="../08-specweave/index.html" data-modulo="specweave">SpecWeave</a></li>
+        <li><a href="../09-complementares/index.html" data-modulo="complementares">Complementares</a></li>
+        <li><a href="../../comparador.html">Comparador</a></li>
+        <li><a href="../../certificado.html">Certificado</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container" id="conteudo">
+    <h1>Tutorial de Spec Kitty</h1>
+    <p>O Spec Kitty é um fluxo SDD em que cada work package roda em seu próprio git worktree e um revisor diferente do autor confere o trabalho. O CLI é gratuito e funciona com mais de 20 agentes.</p>
+    <p class="aviso"><strong>Projeto_Exemplo:</strong> este tutorial usa o projeto “Lista de Tarefas” como exemplo.</p>
+
+    <section aria-labelledby="sec-fontes">
+      <h2 id="sec-fontes">Fonte oficial e dados consultados</h2>
+      <ul>
+        <li>Fonte oficial: <a href="https://spec-kitty.ai">spec-kitty.ai</a> e <a href="https://spec-kitty.ai/getting-started.md">guia de primeiros passos</a>.</li>
+        <li>Data da consulta: 14/11/2026.</li>
+        <li>Versão: spec-kitty-cli 3.2.7.</li>
+        <li>Licença: MIT.</li>
+        <li>Custo: CLI gratuito.</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="sec-ciclo">
+      <h2 id="sec-ciclo">O ciclo do Spec Kitty</h2>
+      <p>O ciclo tem sete etapas: especificar, planejar, tarefas, implementar, revisar, aceitar e mesclar. Cada etapa tem um comando <code>/spec-kitty.*</code> no chat do agente.</p>
+
+      <figure class="visual diagrama" data-ferramenta="spec-kitty">
+        <svg viewBox="0 0 920 100" role="img" aria-labelledby="df-titulo df-desc">
+          <title id="df-titulo">Ciclo do Spec Kitty</title>
+          <desc id="df-desc">Sete etapas em sequência: 1 especificar, 2 planejar, 3 tarefas, 4 implementar, 5 revisar, 6 aceitar e 7 mesclar.</desc>
+          <defs>
+            <marker id="df-seta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 z"/>
+            </marker>
+          </defs>
+          <g class="etapa" transform="translate(10,20)"><rect width="110" height="60" rx="8"/><text x="55" y="35">1. Especificar</text></g>
+          <path class="seta" d="M124 50 H136" marker-end="url(#df-seta)"/>
+          <g class="etapa" transform="translate(140,20)"><rect width="110" height="60" rx="8"/><text x="55" y="35">2. Planejar</text></g>
+          <path class="seta" d="M254 50 H266" marker-end="url(#df-seta)"/>
+          <g class="etapa" transform="translate(270,20)"><rect width="110" height="60" rx="8"/><text x="55" y="35">3. Tarefas</text></g>
+          <path class="seta" d="M384 50 H396" marker-end="url(#df-seta)"/>
+          <g class="etapa" transform="translate(400,20)"><rect width="110" height="60" rx="8"/><text x="55" y="35">4. Implementar</text></g>
+          <path class="seta" d="M514 50 H526" marker-end="url(#df-seta)"/>
+          <g class="etapa" transform="translate(530,20)"><rect width="110" height="60" rx="8"/><text x="55" y="35">5. Revisar</text></g>
+          <path class="seta" d="M644 50 H656" marker-end="url(#df-seta)"/>
+          <g class="etapa" transform="translate(660,20)"><rect width="110" height="60" rx="8"/><text x="55" y="35">6. Aceitar</text></g>
+          <path class="seta" d="M774 50 H786" marker-end="url(#df-seta)"/>
+          <g class="etapa" transform="translate(790,20)"><rect width="110" height="60" rx="8"/><text x="55" y="35">7. Mesclar</text></g>
+        </svg>
+        <figcaption>Ciclo do Spec Kitty: da especificação à mesclagem.</figcaption>
+        <ol class="alt-textual">
+          <li>Especificar: <code>/spec-kitty.specify</code>.</li>
+          <li>Planejar: <code>/spec-kitty.plan</code>.</li>
+          <li>Tarefas: <code>/spec-kitty.tasks</code>.</li>
+          <li>Implementar: <code>/spec-kitty.implement</code>.</li>
+          <li>Revisar: <code>/spec-kitty.review</code>.</li>
+          <li>Aceitar: <code>/spec-kitty.accept</code>.</li>
+          <li>Mesclar: <code>/spec-kitty.merge</code>.</li>
+        </ol>
+      </figure>
+    </section>
+
+    <section aria-labelledby="sec-linha">
+      <h2 id="sec-linha">Linha do tempo de um work package</h2>
+      <p>Cada etapa tem um comando próprio. Na implementação, o work package roda em seu próprio git worktree.</p>
+      <ol class="linha-tempo" aria-label="Etapas do ciclo do Spec Kitty">
+        <li><strong>Especificar</strong> Comando <code>/spec-kitty.specify</code>.</li>
+        <li><strong>Planejar</strong> Comando <code>/spec-kitty.plan</code>.</li>
+        <li><strong>Tarefas</strong> Comando <code>/spec-kitty.tasks</code>.</li>
+        <li><strong>Implementar</strong> Comando <code>/spec-kitty.implement</code>.</li>
+        <li><strong>Revisar</strong> Comando <code>/spec-kitty.review</code>.</li>
+        <li><strong>Aceitar</strong> Comando <code>/spec-kitty.accept</code>.</li>
+        <li><strong>Mesclar</strong> Comando <code>/spec-kitty.merge</code>.</li>
+      </ol>
+    </section>
+
+    <section aria-labelledby="sec-passos">
+      <h2 id="sec-passos">Passo a passo</h2>
+      <p>Use os botões Anterior e Próximo para percorrer os dez passos.</p>
+
+      <ol class="stepper" data-componente="stepper" aria-label="Passo a passo do Spec Kitty">
+        <li data-titulo="Instalar o CLI"><strong>Instalar o CLI</strong> Exige Python 3.11+, <code>pipx</code> e <code>git</code>. Comando de instalação:
+          <div class="bloco-codigo">
+            <pre><code class="comando" id="cmd-1">pipx install spec-kitty-cli</code></pre>
+            <button type="button" data-componente="copiar" data-alvo="cmd-1" hidden disabled>Copiar comando</button>
+          </div></li>
+        <li data-titulo="Inicializar o projeto"><strong>Inicializar o projeto</strong> Crie o projeto com uma chave <code>--ai</code>. Em repositório existente, use <code>spec-kitty init --ai claude</code>; para vários agentes, <code>--ai claude,codex</code>.
+          <div class="bloco-codigo">
+            <pre><code class="comando" id="cmd-2">spec-kitty init my-project --ai claude</code></pre>
+            <button type="button" data-componente="copiar" data-alvo="cmd-2" hidden disabled>Copiar comando</button>
+          </div></li>
+        <li data-titulo="Conferir .kittify/ e os arquivos de comandos do agente"><strong>Conferir .kittify/ e os arquivos de comandos do agente</strong> O init cria <code>.kittify/</code> e arquivos de comandos do agente (por exemplo <code>.claude/</code>). Para adicionar outro agente depois, use <code>spec-kitty agent config add &lt;chave&gt;</code>.</li>
+        <li data-titulo="Especificar"><strong>Especificar</strong> Descreva o Projeto_Exemplo “Lista de Tarefas”.
+          <div class="bloco-codigo">
+            <pre><code class="comando" id="cmd-4">/spec-kitty.specify</code></pre>
+            <button type="button" data-componente="copiar" data-alvo="cmd-4" hidden disabled>Copiar comando</button>
+          </div></li>
+        <li data-titulo="Planejar"><strong>Planejar</strong> Gere o plano a partir da especificação.
+          <div class="bloco-codigo">
+            <pre><code class="comando" id="cmd-5">/spec-kitty.plan</code></pre>
+            <button type="button" data-componente="copiar" data-alvo="cmd-5" hidden disabled>Copiar comando</button>
+          </div></li>
+        <li data-titulo="Gerar as tarefas"><strong>Gerar as tarefas</strong> Gere as tarefas do plano.
+          <div class="bloco-codigo">
+            <pre><code class="comando" id="cmd-6">/spec-kitty.tasks</code></pre>
+            <button type="button" data-componente="copiar" data-alvo="cmd-6" hidden disabled>Copiar comando</button>
+          </div></li>
+        <li data-titulo="Implementar"><strong>Implementar</strong> Cada work package roda em seu próprio git worktree.
+          <div class="bloco-codigo">
+            <pre><code class="comando" id="cmd-7">/spec-kitty.implement</code></pre>
+            <button type="button" data-componente="copiar" data-alvo="cmd-7" hidden disabled>Copiar comando</button>
+          </div></li>
+        <li data-titulo="Revisar"><strong>Revisar</strong> Um revisor diferente do autor confere o trabalho.
+          <div class="bloco-codigo">
+            <pre><code class="comando" id="cmd-8">/spec-kitty.review</code></pre>
+            <button type="button" data-componente="copiar" data-alvo="cmd-8" hidden disabled>Copiar comando</button>
+          </div></li>
+        <li data-titulo="Aceitar"><strong>Aceitar</strong> Aceite o trabalho revisado.
+          <div class="bloco-codigo">
+            <pre><code class="comando" id="cmd-9">/spec-kitty.accept</code></pre>
+            <button type="button" data-componente="copiar" data-alvo="cmd-9" hidden disabled>Copiar comando</button>
+          </div></li>
+        <li data-titulo="Mesclar"><strong>Mesclar</strong> Mescle o resultado aceito.
+          <div class="bloco-codigo">
+            <pre><code class="comando" id="cmd-10">/spec-kitty.merge</code></pre>
+            <button type="button" data-componente="copiar" data-alvo="cmd-10" hidden disabled>Copiar comando</button>
+          </div></li>
+      </ol>
+    </section>
+
+    <section aria-labelledby="sec-estrutura">
+      <h2 id="sec-estrutura">Estrutura criada pelo init</h2>
+      <p>O comando <code>spec-kitty init my-project --ai claude</code> cria estas pastas no projeto.</p>
+
+      <figure class="visual mockup">
+        <ul aria-label="Estrutura de pastas criada pelo init do Spec Kitty">
+          <li><code>my-project/</code>
+            <ul>
+              <li><code>.kittify/</code></li>
+              <li><code>.claude/</code></li>
+            </ul>
+          </li>
+        </ul>
+        <figcaption><span class="selo">Ilustrativo</span> Os nomes das pastas vêm da <a href="https://spec-kitty.ai/getting-started.md">fonte oficial</a>; a pasta <code>.claude/</code> depende do agente escolhido.</figcaption>
+      </figure>
+    </section>
+
+    <section aria-labelledby="sec-cartao">
+      <h2 id="sec-cartao">Cartão comparativo</h2>
+      <article style="--cor-ferramenta:#0b6e4f" data-ferramenta="spec-kitty" class="cartao"><h3><img height="40" width="40" aria-hidden="true" alt="" src="../../assets/svg/spec-kitty.svg"><span>Spec Kitty</span></h3><p>Fluxo SDD com um git worktree por work package e revisão por pessoa ou agente diferente do autor.</p><dl><dt>Instalação</dt><dd><code>pipx install spec-kitty-cli</code></dd><dt>Agentes suportados</dt><dd>verificar na fonte</dd><dt>Artefatos principais</dt><dd><code>.kittify/</code>, <code>.claude/ (arquivos de comandos do agente escolhido)</code></dd><dt>Versão</dt><dd>spec-kitty-cli 3.2.7</dd><dt>Licença</dt><dd>MIT</dd><dt>Custo</dt><dd>CLI gratuito</dd><dt>Fonte oficial</dt><dd><a rel="noopener noreferrer" href="https://spec-kitty.ai">https://spec-kitty.ai</a></dd><dt>Data da consulta</dt><dd>14/11/2026</dd></dl></article>
+    </section>
+    <section class="concluir" aria-label="Conclusão da lição">
+      <button type="button" class="botao-concluir" data-componente="botao-concluir" data-licao="licao:spec-kitty/tutorial" aria-pressed="false" disabled>Marcar como concluída</button>
+    </section>
+
+    <nav class="navegacao-licao" aria-label="Navegação entre lições">
+      <a rel="prev" href="index.html">&larr; Índice do módulo</a>
+      <a rel="next" href="exercicio.html">Próximo: Exercício de Spec Kitty &rarr;</a>
+    </nav>
+  </main>
+</body>
+</html>

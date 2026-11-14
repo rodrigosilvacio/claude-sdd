@@ -1,0 +1,80 @@
+/* Impressão do certificado (R14.12): A4 paisagem, sem Menu, formulário e controles. */
+@page {
+  size: A4 landscape;
+  margin: 12mm;
+}
+
+@media print {
+  html, body {
+    background: #ffffff;
+    color: #000000;
+    font-size: 12pt;
+  }
+
+  /* Menu, formulário, controles, pendências e demais elementos de navegação */
+  .menu,
+  .menu-botao,
+  .menu-lista,
+  nav,
+  header .menu,
+  footer,
+  form,
+  .certificado-form,
+  .certificado-pendencias,
+  .certificado-percentual,
+  .certificado-controles,
+  .certificado-erro,
+  .botao-concluir,
+  button,
+  [data-nao-imprimir],
+  [aria-live] {
+    display: none !important;
+  }
+
+  /* Mantém apenas o certificado na folha */
+  .container, main {
+    display: block;
+    max-width: none;
+    margin: 0;
+    padding: 0;
+  }
+  main > *:not(.certificado):not(#certificado):not([data-componente="certificado"]) { display: none !important; }
+
+  .certificado,
+  #certificado {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: 180mm;
+    margin: 0;
+    padding: var(--espaco-6);
+    text-align: center;
+    color: #000000;
+    background: #ffffff;
+    border: 3px double #000000;
+    border-radius: 0;
+    break-inside: avoid;
+    page-break-inside: avoid;
+    outline: none;
+  }
+  .certificado[hidden], #certificado[hidden] { display: none !important; }
+  .certificado *, #certificado * { color: #000000; background: transparent; }
+  .certificado .certificado-nome, #certificado .certificado-nome {
+    font-size: 28pt;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+  }
+  .certificado .certificado-declaracao, #certificado .certificado-declaracao {
+    margin-top: var(--espaco-5);
+    font-size: 10pt;
+  }
+
+  /* Declaração de autodeclarado permanece visível mesmo fora do certificado */
+  .declaracao-autodeclarado { display: block !important; }
+
+  a { color: inherit; text-decoration: none; }
+  * { animation: none !important; transition: none !important; }
+}

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Exercício de AWS Kiro | Curso de Spec-Driven Development</title>
+  <meta name="description" content="Exercício do AWS Kiro: ordene as etapas do ciclo e marque o checklist com o Projeto_Exemplo Lista de Tarefas.">
+  <link rel="stylesheet" href="../../assets/css/tokens.css">
+  <link rel="stylesheet" href="../../assets/css/base.css">
+  <link rel="stylesheet" href="../../assets/css/layout.css">
+  <link rel="stylesheet" href="../../assets/css/visuais.css">
+  <script type="module" src="../../assets/js/app.js"></script>
+</head>
+<body data-modulo="kiro">
+  <header>
+    <nav class="menu" data-componente="menu" aria-label="Principal">
+      <button type="button" class="menu-botao" aria-expanded="false" aria-controls="menu-lista">Menu</button>
+      <ul class="menu-lista" id="menu-lista">
+        <li><a href="../../index.html">Início</a></li>
+        <li><a href="../01-fundamentos/index.html" data-modulo="fundamentos">Fundamentos</a></li>
+        <li><a href="../02-openspec/index.html" data-modulo="openspec">OpenSpec</a></li>
+        <li><a href="../03-spec-kit/index.html" data-modulo="spec-kit">Spec Kit</a></li>
+        <li><a href="../04-bmad/index.html" data-modulo="bmad">BMAD</a></li>
+        <li><a href="../05-kiro/index.html" data-modulo="kiro">Kiro</a></li>
+        <li><a href="../06-gsd/index.html" data-modulo="gsd">GSD</a></li>
+        <li><a href="../07-spec-kitty/index.html" data-modulo="spec-kitty">Spec Kitty</a></li>
+        <li><a href="../08-specweave/index.html" data-modulo="specweave">SpecWeave</a></li>
+        <li><a href="../09-complementares/index.html" data-modulo="complementares">Complementares</a></li>
+        <li><a href="../../comparador.html">Comparador</a></li>
+        <li><a href="../../certificado.html">Certificado</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container" id="conteudo">
+    <h1>Exercício de AWS Kiro</h1>
+    <p>Aplique o que viu no tutorial ao Projeto_Exemplo “Lista de Tarefas”. Primeiro ordene as etapas do ciclo do Kiro. Depois percorra o checklist; o exercício conta como concluído quando todos os itens estiverem marcados.</p>
+
+    <section aria-labelledby="sec-ordenar">
+      <h2 id="sec-ordenar">Ordene as etapas do ciclo</h2>
+      <p>Use os botões Subir e Descer para colocar as etapas na ordem do ciclo do Kiro e clique em Verificar ordem.</p>
+      <div class="atividade" data-componente="ordenar" data-canonica="requirements,design,tasks,execucao">
+        <ol aria-label="Etapas do ciclo do AWS Kiro fora de ordem">
+          <li data-id="tasks">Tarefas</li>
+          <li data-id="execucao">Execução em ondas paralelas</li>
+          <li data-id="requirements">Requisitos</li>
+          <li data-id="design">Design</li>
+        </ol>
+      </div>
+    </section>
+
+    <section aria-labelledby="sec-checklist">
+      <h2 id="sec-checklist">Checklist</h2>
+      <p>Marque cada item conforme o conclui. O estado fica salvo neste navegador.</p>
+      <ul class="checklist" data-componente="checklist" data-ferramenta="kiro">
+        <li><input type="checkbox" id="chk-kiro-1" data-item="kiro/c1"> <label for="chk-kiro-1">Instalar o CLI com <code>curl -fsSL https://cli.kiro.dev/install | bash</code> ou abrir o Kiro na IDE.</label></li>
+        <li><input type="checkbox" id="chk-kiro-2" data-item="kiro/c2"> <label for="chk-kiro-2">Criar uma spec para o Projeto_Exemplo pelo fluxo Requirements-First.</label></li>
+        <li><input type="checkbox" id="chk-kiro-3" data-item="kiro/c3"> <label for="chk-kiro-3">Conferir o arquivo <code>requirements.md</code> gerado.</label></li>
+        <li><input type="checkbox" id="chk-kiro-4" data-item="kiro/c4"> <label for="chk-kiro-4">Conferir o arquivo <code>design.md</code> gerado.</label></li>
+        <li><input type="checkbox" id="chk-kiro-5" data-item="kiro/c5"> <label for="chk-kiro-5">Conferir o arquivo <code>tasks.md</code> gerado e executar uma tarefa.</label></li>
+        <li><input type="checkbox" id="chk-kiro-6" data-item="kiro/c6"> <label for="chk-kiro-6">Comparar o fluxo Design-First e o Quick Spec com o fluxo Requirements-First.</label></li>
+      </ul>
+    </section>
+
+    <nav class="navegacao-licao" aria-label="Navegação entre lições">
+      <a rel="prev" href="tutorial.html">&larr; Anterior: Tutorial de AWS Kiro</a>
+      <a rel="next" href="quiz.html">Próximo: Quiz de AWS Kiro &rarr;</a>
+    </nav>
+  </main>
+</body>
+</html>

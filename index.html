@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Curso de Spec-Driven Development (SDD)</title>
+  <meta name="description" content="Curso em português sobre Spec-Driven Development com sete ferramentas, exercícios, quizzes e certificado autodeclarado.">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/visuais.css">
+  <script type="module" src="assets/js/app.js"></script>
+</head>
+<body>
+  <a href="#conteudo">Pular para o conteúdo</a>
+
+  <div data-componente="avisos-progresso" role="status"></div>
+
+  <header>
+    <nav class="menu" data-componente="menu" aria-label="Principal">
+      <button type="button" class="menu-botao" aria-expanded="true" aria-controls="menu-lista">Menu</button>
+      <ul class="menu-lista" id="menu-lista">
+        <li><a href="index.html" aria-current="page">Início</a></li>
+        <li><a href="modulos/01-fundamentos/index.html" data-modulo="fundamentos">Fundamentos de SDD</a></li>
+        <li><a href="modulos/02-openspec/index.html" data-modulo="openspec">OpenSpec</a></li>
+        <li><a href="modulos/03-spec-kit/index.html" data-modulo="spec-kit">GitHub Spec Kit</a></li>
+        <li><a href="modulos/04-bmad/index.html" data-modulo="bmad">BMAD Method</a></li>
+        <li><a href="modulos/05-kiro/index.html" data-modulo="kiro">AWS Kiro</a></li>
+        <li><a href="modulos/06-gsd/index.html" data-modulo="gsd">GSD</a></li>
+        <li><a href="modulos/07-spec-kitty/index.html" data-modulo="spec-kitty">Spec Kitty</a></li>
+        <li><a href="modulos/08-specweave/index.html" data-modulo="specweave">SpecWeave</a></li>
+        <li><a href="modulos/09-complementares/index.html" data-modulo="complementares">Ferramentas complementares</a></li>
+        <li><a href="comparador.html">Comparador</a></li>
+        <li><a href="certificado.html">Certificado</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="conteudo" class="container">
+    <h1>Curso de Spec-Driven Development (SDD)</h1>
+    <p>Aprenda a escrever especificações antes do código e a conduzir agentes de IA com elas. O curso apresenta os fundamentos e ensina, passo a passo, sete ferramentas de SDD, com exercícios, quizzes, um comparador e um certificado de participação autodeclarado.</p>
+    <p>Carga horária estimada: <strong>24 horas</strong>.</p>
+
+    <p><a href="modulos/01-fundamentos/01-o-que-e-sdd.html" data-licao="licao:fundamentos/o-que-e-sdd">Começar pela primeira lição</a></p>
+
+    <section class="visual" aria-labelledby="progresso-titulo" data-componente="progresso-inicio" hidden>
+      <h2 id="progresso-titulo">Seu progresso</h2>
+      <p>Progresso do curso: <strong data-campo="percentual">0%</strong></p>
+      <progress max="100" value="0" aria-label="Progresso do curso">0%</progress>
+      <p><a data-campo="continuar" href="modulos/01-fundamentos/index.html" hidden>Continuar</a></p>
+    </section>
+
+    <section aria-labelledby="modulos-titulo">
+      <h2 id="modulos-titulo">Módulos</h2>
+      <ol>
+        <li><a href="modulos/01-fundamentos/index.html">Fundamentos de SDD</a></li>
+        <li><a href="modulos/02-openspec/index.html">OpenSpec</a></li>
+        <li><a href="modulos/03-spec-kit/index.html">GitHub Spec Kit</a></li>
+        <li><a href="modulos/04-bmad/index.html">BMAD Method</a></li>
+        <li><a href="modulos/05-kiro/index.html">AWS Kiro</a></li>
+        <li><a href="modulos/06-gsd/index.html">GSD</a></li>
+        <li><a href="modulos/07-spec-kitty/index.html">Spec Kitty</a></li>
+        <li><a href="modulos/08-specweave/index.html">SpecWeave</a></li>
+        <li><a href="modulos/09-complementares/index.html">Ferramentas complementares</a></li>
+      </ol>
+    </section>
+
+    <section aria-labelledby="ferramentas-titulo">
+      <h2 id="ferramentas-titulo">Ferramentas cobertas</h2>
+      <ul>
+        <li>OpenSpec</li>
+        <li>GitHub Spec Kit</li>
+        <li>BMAD Method</li>
+        <li>AWS Kiro</li>
+        <li>GSD</li>
+        <li>Spec Kitty</li>
+        <li>SpecWeave</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="atalhos-titulo">
+      <h2 id="atalhos-titulo">Atalhos</h2>
+      <ul>
+        <li><a href="comparador.html">Comparador de ferramentas</a></li>
+        <li><a href="certificado.html">Certificado de participação</a></li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="dados-titulo">
+      <h2 id="dados-titulo">Seus dados</h2>
+      <p>O progresso fica salvo apenas neste navegador, sem conta e sem envio para servidores.</p>
+      <p><button type="button" data-componente="reiniciar-progresso">Reiniciar progresso</button></p>
+    </section>
+  </main>
+</body>
+</html>

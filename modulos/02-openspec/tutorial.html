@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tutorial de OpenSpec | Curso de Spec-Driven Development</title>
+  <meta name="description" content="Tutorial do OpenSpec com o Projeto_Exemplo Lista de Tarefas: instalação, ciclo explorar, propor, aplicar e arquivar.">
+  <link rel="stylesheet" href="../../assets/css/tokens.css">
+  <link rel="stylesheet" href="../../assets/css/base.css">
+  <link rel="stylesheet" href="../../assets/css/layout.css">
+  <link rel="stylesheet" href="../../assets/css/visuais.css">
+  <script type="module" src="../../assets/js/app.js"></script>
+</head>
+<body data-modulo="openspec">
+  <header>
+    <nav class="menu" data-componente="menu" aria-label="Principal">
+      <button type="button" class="menu-botao" aria-expanded="false" aria-controls="menu-lista">Menu</button>
+      <ul class="menu-lista" id="menu-lista">
+        <li><a href="../../index.html">Início</a></li>
+        <li><a href="../01-fundamentos/index.html" data-modulo="fundamentos">Fundamentos</a></li>
+        <li><a href="../02-openspec/index.html" data-modulo="openspec">OpenSpec</a></li>
+        <li><a href="../03-spec-kit/index.html" data-modulo="spec-kit">Spec Kit</a></li>
+        <li><a href="../04-bmad/index.html" data-modulo="bmad">BMAD</a></li>
+        <li><a href="../05-kiro/index.html" data-modulo="kiro">Kiro</a></li>
+        <li><a href="../06-gsd/index.html" data-modulo="gsd">GSD</a></li>
+        <li><a href="../07-spec-kitty/index.html" data-modulo="spec-kitty">Spec Kitty</a></li>
+        <li><a href="../08-specweave/index.html" data-modulo="specweave">SpecWeave</a></li>
+        <li><a href="../09-complementares/index.html" data-modulo="complementares">Complementares</a></li>
+        <li><a href="../../comparador.html">Comparador</a></li>
+        <li><a href="../../certificado.html">Certificado</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container" id="conteudo">
+    <h1>Tutorial de OpenSpec</h1>
+    <p>O OpenSpec propõe, aplica e arquiva mudanças com requisitos em Markdown, orientadas por comandos no agente de IA. A licença informada na fonte é MIT.</p>
+
+    <p class="aviso" role="note"><strong>Projeto_Exemplo:</strong> este tutorial usa o projeto “Lista de Tarefas”, o mesmo dos tutoriais das outras ferramentas, para que você possa comparar os fluxos.</p>
+
+    <section aria-labelledby="sec-fonte">
+      <h2 id="sec-fonte">Fonte oficial e versão</h2>
+      <ul>
+        <li>Fonte oficial: <a href="https://github.com/Fission-AI/OpenSpec">https://github.com/Fission-AI/OpenSpec</a>.</li>
+        <li>Documentação citada no README: <a href="https://openspec.dev/docs">https://openspec.dev/docs</a> (não foi acessada na consulta).</li>
+        <li>Data de consulta: 14/11/2026.</li>
+        <li>Versão: versão não informada na fonte.</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="sec-pre">
+      <h2 id="sec-pre">Pré-requisitos</h2>
+      <p>É preciso ter Node.js 22.12.0 ou superior e um agente de IA compatível. A fonte informa suporte a mais de 30 assistentes de IA, sem listar todos.</p>
+    </section>
+
+    <section aria-labelledby="sec-ciclo">
+      <h2 id="sec-ciclo">O ciclo do OpenSpec</h2>
+      <p>O ciclo tem quatro etapas: explorar, propor, aplicar e arquivar. Cada uma é acionada por um comando no agente de IA.</p>
+
+      <figure class="visual diagrama" data-ferramenta="openspec">
+        <svg viewBox="0 0 740 100" role="img" aria-labelledby="df-titulo df-desc">
+          <title id="df-titulo">Ciclo do OpenSpec</title>
+          <desc id="df-desc">Quatro etapas em sequência: 1 explorar, 2 propor, 3 aplicar e 4 arquivar.</desc>
+          <defs>
+            <marker id="df-seta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 z"/>
+            </marker>
+          </defs>
+          <g class="etapa" transform="translate(10,20)"><rect width="150" height="60" rx="8"/><text x="75" y="35">1. Explorar</text></g>
+          <path class="seta" d="M164 50 H196" marker-end="url(#df-seta)"/>
+          <g class="etapa" transform="translate(200,20)"><rect width="150" height="60" rx="8"/><text x="75" y="35">2. Propor</text></g>
+          <path class="seta" d="M354 50 H386" marker-end="url(#df-seta)"/>
+          <g class="etapa" transform="translate(390,20)"><rect width="150" height="60" rx="8"/><text x="75" y="35">3. Aplicar</text></g>
+          <path class="seta" d="M544 50 H576" marker-end="url(#df-seta)"/>
+          <g class="etapa" transform="translate(580,20)"><rect width="150" height="60" rx="8"/><text x="75" y="35">4. Arquivar</text></g>
+        </svg>
+        <figcaption>Ciclo do OpenSpec: explorar, propor, aplicar e arquivar.</figcaption>
+        <ol class="alt-textual">
+          <li>Explorar: <code>/openspec-explore</code></li>
+          <li>Propor: <code>/openspec-propose</code></li>
+          <li>Aplicar: <code>/openspec-apply-change</code></li>
+          <li>Arquivar: <code>/openspec-archive-change</code></li>
+        </ol>
+      </figure>
+
+      <ol class="linha-tempo" aria-label="O que cada etapa do OpenSpec faz">
+        <li><strong>Explorar</strong> Investigar a ideia com o agente, antes de propor.</li>
+        <li><strong>Propor</strong> Gerar a pasta da mudança com proposta, especificações, design e tarefas.</li>
+        <li><strong>Aplicar</strong> Implementar as tarefas de <code>tasks.md</code>.</li>
+        <li><strong>Arquivar</strong> Mover a mudança concluída para <code>archive/</code>.</li>
+      </ol>
+    </section>
+
+    <section aria-labelledby="sec-passos">
+      <h2 id="sec-passos">Instalação e passo a passo</h2>
+      <p>Siga os seis passos, na ordem, usando o botão Próximo. Cada comando tem um botão para copiar.</p>
+
+      <ol class="stepper" data-componente="stepper" aria-label="Passo a passo do OpenSpec">
+        <li data-titulo="Instalar o OpenSpec">
+          <strong>Instalar o OpenSpec</strong>
+          <p>Exige Node.js 22.12.0 ou superior. Alternativas: <code>brew install openspec</code> ou script curl/PowerShell.</p>
+          <p><code class="comando" id="cmd-1">npm install -g @fission-ai/openspec@latest</code> <button type="button" data-componente="copiar" data-alvo="cmd-1" hidden>Copiar</button></p>
+        </li>
+        <li data-titulo="Inicializar o projeto">
+          <strong>Inicializar o projeto</strong>
+          <p><code class="comando" id="cmd-2">openspec init</code> <button type="button" data-componente="copiar" data-alvo="cmd-2" hidden>Copiar</button></p>
+        </li>
+        <li data-titulo="Explorar a ideia">
+          <strong>Explorar a ideia</strong>
+          <p><code class="comando" id="cmd-3">/openspec-explore</code> <button type="button" data-componente="copiar" data-alvo="cmd-3" hidden>Copiar</button></p>
+        </li>
+        <li data-titulo="Propor a mudança">
+          <strong>Propor a mudança</strong>
+          <p>Gera <code>openspec/changes/&lt;nome&gt;/</code> com <code>proposal.md</code>, <code>specs/</code>, <code>design.md</code> e <code>tasks.md</code>. No Codex, use <code>$openspec-propose</code>.</p>
+          <p><code class="comando" id="cmd-4">/openspec-propose &lt;descrição&gt;</code> <button type="button" data-componente="copiar" data-alvo="cmd-4" hidden>Copiar</button></p>
+        </li>
+        <li data-titulo="Aplicar a mudança">
+          <strong>Aplicar a mudança</strong>
+          <p><code class="comando" id="cmd-5">/openspec-apply-change</code> <button type="button" data-componente="copiar" data-alvo="cmd-5" hidden>Copiar</button></p>
+        </li>
+        <li data-titulo="Arquivar a mudança">
+          <strong>Arquivar a mudança</strong>
+          <p>Move a mudança para <code>openspec/changes/archive/</code>.</p>
+          <p><code class="comando" id="cmd-6">/openspec-archive-change</code> <button type="button" data-componente="copiar" data-alvo="cmd-6" hidden>Copiar</button></p>
+        </li>
+      </ol>
+    </section>
+
+    <section aria-labelledby="sec-arvore">
+      <h2 id="sec-arvore">Resultado esperado</h2>
+      <p>Depois de propor uma mudança, a pasta <code>openspec/</code> do projeto fica com esta estrutura. Ao arquivar, a mudança vai para <code>archive/</code>.</p>
+
+      <figure class="visual mockup">
+        <ul aria-label="Estrutura de pastas e arquivos do OpenSpec">
+          <li><code>openspec/</code>
+            <ul>
+              <li><code>changes/</code>
+                <ul>
+                  <li><code>&lt;nome&gt;/</code>
+                    <ul>
+                      <li><code>proposal.md</code></li>
+                      <li><code>specs/</code></li>
+                      <li><code>design.md</code></li>
+                      <li><code>tasks.md</code></li>
+                    </ul>
+                  </li>
+                  <li><code>archive/</code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <figcaption>Ilustrativo: estrutura conforme a <a href="https://github.com/Fission-AI/OpenSpec">fonte oficial</a>; <code>&lt;nome&gt;</code> é o nome da mudança.</figcaption>
+      </figure>
+    </section>
+
+    <section aria-labelledby="sec-problemas">
+      <h2 id="sec-problemas">Solução de problemas comuns</h2>
+      <ul>
+        <li>A instalação falha: confira se o Node.js é 22.12.0 ou superior.</li>
+        <li>O npm não é uma opção: a fonte também cita <code>brew install openspec</code> e scripts curl/PowerShell.</li>
+        <li>O comando <code>/openspec-propose</code> não é reconhecido no Codex: use <code>$openspec-propose</code>.</li>
+        <li>Outros erros: consulte a <a href="https://github.com/Fission-AI/OpenSpec">fonte oficial</a>, que não lista outros problemas conhecidos.</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="sec-cartao">
+      <h2 id="sec-cartao">Cartão comparativo</h2>
+      <article style="--cor-ferramenta:#0b4f9c" data-ferramenta="openspec" class="cartao"><h3><img height="40" width="40" aria-hidden="true" alt="" src="../../assets/svg/openspec.svg"><span>OpenSpec</span></h3><p>Propor, aplicar e arquivar mudanças com requisitos em Markdown, orientadas por comandos no agente de IA.</p><dl><dt>Instalação</dt><dd><code>npm install -g @fission-ai/openspec@latest</code></dd><dt>Agentes suportados</dt><dd>verificar na fonte</dd><dt>Artefatos principais</dt><dd><code>openspec/changes/&lt;nome&gt;/proposal.md</code>, <code>openspec/changes/&lt;nome&gt;/specs/</code>, <code>openspec/changes/&lt;nome&gt;/design.md</code>, <code>openspec/changes/&lt;nome&gt;/tasks.md</code>, <code>openspec/changes/archive/</code></dd><dt>Versão</dt><dd>versão não informada na fonte</dd><dt>Licença</dt><dd>MIT</dd><dt>Custo</dt><dd>verificar na fonte</dd><dt>Fonte oficial</dt><dd><a rel="noopener noreferrer" href="https://github.com/Fission-AI/OpenSpec">https://github.com/Fission-AI/OpenSpec</a></dd><dt>Data da consulta</dt><dd>14/11/2026</dd></dl></article>
+    </section>
+    <section class="concluir" aria-label="Conclusão da lição">
+      <button type="button" class="botao-concluir" data-componente="botao-concluir" data-licao="licao:openspec/tutorial" aria-pressed="false" disabled>Marcar como concluída</button>
+    </section>
+
+    <nav class="navegacao-licao" aria-label="Navegação entre itens">
+      <a rel="prev" href="index.html">&larr; Índice do módulo</a>
+      <a rel="next" href="exercicio.html">Próximo: Exercício de OpenSpec &rarr;</a>
+    </nav>
+  </main>
+</body>
+</html>

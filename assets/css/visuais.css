@@ -1,0 +1,350 @@
+/* Elementos visuais do curso. Usa apenas os tokens de tokens.css.
+   --cor-ferramenta: definida por elemento (style="--cor-ferramenta: #...") com
+   contraste mínimo de 3:1 contra --cor-fundo; o padrão é --cor-destaque.
+   Estado nunca depende só de cor: há texto, número, ícone ou forma (R18.5).
+   Transições: no máximo 600 ms; nenhuma animação infinite (R17.14). */
+
+.visual,
+.cartao,
+.atividade,
+.diagrama,
+.linha-tempo,
+.stepper,
+.mockup,
+.botao-concluir {
+  --cor-ferramenta: var(--cor-destaque);
+  --duracao-visual: var(--duracao, 200ms);
+}
+
+.visual {
+  margin: var(--espaco-5) 0;
+  padding: var(--espaco-4);
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+}
+.visual > figcaption {
+  margin-top: var(--espaco-3);
+  font-size: 0.9375rem;
+  color: var(--cor-texto-suave);
+}
+
+/* ---------- Diagrama_Fluxo ---------- */
+.diagrama svg { display: block; width: 100%; height: auto; max-width: 100%; }
+.diagrama .etapa rect {
+  fill: var(--cor-fundo);
+  stroke: var(--cor-ferramenta);
+  stroke-width: 2;
+}
+.diagrama .etapa text {
+  fill: var(--cor-texto);
+  font-family: var(--fonte-texto);
+  font-size: 14px;
+  text-anchor: middle;
+}
+.diagrama .seta {
+  fill: none;
+  stroke: var(--cor-ferramenta);
+  stroke-width: 2;
+}
+.diagrama marker, .diagrama marker path { fill: var(--cor-ferramenta); }
+.diagrama .alt-textual {
+  margin: var(--espaco-3) 0 0;
+  padding-left: var(--espaco-5);
+}
+
+/* ---------- Linha_Tempo: vertical por padrão, horizontal em telas largas ---------- */
+.linha-tempo {
+  list-style: none;
+  margin: var(--espaco-5) 0;
+  padding: 0 0 0 var(--espaco-6);
+  position: relative;
+  counter-reset: fase;
+}
+.linha-tempo::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0.9rem;
+  width: 3px;
+  background: var(--cor-ferramenta);
+}
+.linha-tempo > li {
+  position: relative;
+  margin: 0 0 var(--espaco-5);
+  padding: var(--espaco-3) var(--espaco-4);
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  counter-increment: fase;
+}
+.linha-tempo > li::before {
+  content: counter(fase);
+  position: absolute;
+  top: var(--espaco-3);
+  left: calc(-1 * var(--espaco-6));
+  display: grid;
+  place-items: center;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  background: var(--cor-ferramenta);
+  color: var(--cor-texto-destaque);
+  font-weight: 700;
+}
+.linha-tempo > li:last-child { margin-bottom: 0; }
+.linha-tempo strong { display: block; }
+.linha-tempo code { overflow-wrap: anywhere; }
+
+@media (min-width: 768px) {
+  .linha-tempo {
+    display: flex;
+    gap: var(--espaco-4);
+    padding: var(--espaco-6) 0 0;
+    overflow-x: auto;
+  }
+  .linha-tempo::before {
+    top: 0.9rem;
+    bottom: auto;
+    left: 0;
+    right: 0;
+    width: auto;
+    height: 3px;
+  }
+  .linha-tempo > li {
+    flex: 1 1 10rem;
+    min-width: 10rem;
+    margin: 0;
+  }
+  .linha-tempo > li::before {
+    top: calc(-1 * var(--espaco-6));
+    left: var(--espaco-3);
+  }
+}
+
+/* ---------- Stepper ---------- */
+.stepper {
+  margin: var(--espaco-5) 0;
+  padding-left: var(--espaco-5);
+}
+.stepper > li { margin-bottom: var(--espaco-3); }
+.stepper > li[aria-current="step"] {
+  padding: var(--espaco-3) var(--espaco-4);
+  border-left: 6px solid var(--cor-ferramenta);
+  background: var(--cor-superficie);
+  border-radius: var(--raio);
+}
+.stepper[data-ativo] { list-style-position: inside; }
+.stepper-controles {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espaco-3);
+  margin: var(--espaco-3) 0;
+}
+.stepper-controles button,
+.atividade button {
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  padding: var(--espaco-2) var(--espaco-4);
+  font: inherit;
+  color: var(--cor-texto-destaque);
+  background: var(--cor-destaque);
+  border: 2px solid var(--cor-destaque);
+  border-radius: var(--raio);
+  cursor: pointer;
+  transition: background-color var(--duracao-visual) ease, border-color var(--duracao-visual) ease;
+}
+.stepper-controles button:disabled,
+.atividade button:disabled {
+  color: var(--cor-texto-suave);
+  background: var(--cor-superficie);
+  border-color: var(--cor-borda);
+  border-style: dashed;
+  cursor: not-allowed;
+}
+.stepper-progresso { font-weight: 600; }
+
+/* ---------- Mockup_Estrutura ---------- */
+.mockup { position: relative; padding-top: var(--espaco-6); }
+.mockup::before {
+  content: "Ilustrativo";
+  position: absolute;
+  top: var(--espaco-2);
+  right: var(--espaco-3);
+  padding: var(--espaco-1) var(--espaco-3);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--cor-texto);
+  background: var(--cor-fundo);
+  border: 2px dashed var(--cor-borda);
+  border-radius: var(--raio);
+}
+.mockup pre,
+.mockup ul {
+  margin: 0;
+  font-family: var(--fonte-codigo);
+  font-size: 0.9375rem;
+  overflow-x: auto;
+}
+.mockup ul { list-style: none; padding-left: var(--espaco-4); }
+.mockup ul ul { margin-top: var(--espaco-1); border-left: 2px solid var(--cor-borda); }
+.mockup li { padding: var(--espaco-1) 0; }
+
+/* ---------- Cartão_Comparativo ---------- */
+.cartao {
+  padding: var(--espaco-4) var(--espaco-5);
+  background: var(--cor-fundo);
+  border: 1px solid var(--cor-borda);
+  border-top: 6px solid var(--cor-ferramenta);
+  border-radius: var(--raio);
+}
+.cartao h2, .cartao h3 {
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-3);
+  margin-top: 0;
+}
+.cartao img, .cartao svg.icone { width: 2.5rem; height: 2.5rem; flex: none; }
+.cartao dl { margin: 0; display: grid; grid-template-columns: 1fr; gap: var(--espaco-1) var(--espaco-4); }
+.cartao dt { font-weight: 700; color: var(--cor-texto-suave); }
+.cartao dd { margin: 0 0 var(--espaco-2); }
+.cartoes {
+  display: grid;
+  gap: var(--espaco-4);
+  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
+}
+@media (min-width: 768px) {
+  .cartao dl { grid-template-columns: max-content 1fr; }
+}
+
+/* ---------- Atividade_Interativa (ordenar) ---------- */
+.atividade {
+  margin: var(--espaco-5) 0;
+  padding: var(--espaco-4);
+  border: 2px solid var(--cor-ferramenta);
+  border-radius: var(--raio);
+}
+.atividade ol { list-style: decimal; padding-left: var(--espaco-5); margin: var(--espaco-3) 0; }
+.atividade li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--espaco-2);
+  margin-bottom: var(--espaco-2);
+  padding: var(--espaco-2) var(--espaco-3);
+  background: var(--cor-superficie);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+}
+.atividade li[aria-current="step"] { border-left: 6px solid var(--cor-ferramenta); }
+.atividade li .texto { flex: 1 1 12rem; }
+.atividade .feedback {
+  margin-top: var(--espaco-3);
+  padding: var(--espaco-2) var(--espaco-3);
+  border-left: 6px solid var(--cor-borda);
+  font-weight: 600;
+}
+.atividade .feedback::before { content: "Resultado: "; }
+.atividade .feedback[data-estado="correto"] { border-left-color: var(--cor-ferramenta); }
+.atividade .feedback[data-estado="correto"]::before { content: "\2713  Correto. "; }
+.atividade .feedback[data-estado="incorreto"]::before { content: "\2717  Ainda não. "; }
+
+/* ---------- Tabelas com contêiner de rolagem interna ---------- */
+.tabela-rolagem {
+  max-width: 100%;
+  margin: var(--espaco-4) 0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+}
+.tabela-rolagem:focus-visible { outline-offset: -3px; }
+.tabela-rolagem table {
+  width: 100%;
+  min-width: 36rem;
+  border-collapse: collapse;
+}
+.tabela-rolagem caption { padding: var(--espaco-3); text-align: left; font-weight: 700; }
+.tabela-rolagem th,
+.tabela-rolagem td {
+  padding: var(--espaco-2) var(--espaco-3);
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--cor-borda);
+}
+.tabela-rolagem thead th { background: var(--cor-superficie); }
+
+/* ---------- Botão_Concluir ---------- */
+.concluir { margin: var(--espaco-6) 0; }
+.botao-concluir {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--espaco-3);
+  min-width: 2.75rem;
+  min-height: 3rem;
+  padding: var(--espaco-3) var(--espaco-5);
+  font: inherit;
+  font-weight: 600;
+  color: var(--cor-texto-destaque);
+  background: var(--cor-destaque);
+  border: 2px solid var(--cor-destaque);
+  border-radius: var(--raio);
+  cursor: pointer;
+  touch-action: manipulation;
+  transition: background-color var(--duracao-visual) ease, color var(--duracao-visual) ease;
+}
+/* Não concluída: caixa vazia + texto "Marcar como concluída" */
+.botao-concluir::before {
+  content: "";
+  flex: none;
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 2px solid currentColor;
+  border-radius: 0.25rem;
+}
+/* Concluída: ícone de verificação + texto "Concluída (desmarcar)"; fundo claro e borda
+   grossa diferenciam o estado também sem cor. */
+.botao-concluir[aria-pressed="true"] {
+  color: var(--cor-texto);
+  background: var(--cor-fundo);
+  border-width: 4px;
+  border-color: var(--cor-destaque);
+}
+.botao-concluir[aria-pressed="true"]::before {
+  content: "\2713";
+  display: grid;
+  place-items: center;
+  font-weight: 900;
+  line-height: 1;
+  color: var(--cor-texto-destaque);
+  background: var(--cor-destaque);
+  border-color: var(--cor-destaque);
+}
+.botao-concluir:focus-visible {
+  outline: 3px solid var(--cor-foco);   /* --cor-foco/--cor-fundo 8,0:1 (mín. 3:1) */
+  outline-offset: 3px;
+}
+.botao-concluir:disabled {
+  color: var(--cor-texto-suave);
+  background: var(--cor-superficie);
+  border: 2px dashed var(--cor-borda);
+  cursor: not-allowed;
+}
+
+/* ---------- Movimento ---------- */
+@media (prefers-reduced-motion: reduce) {
+  .stepper-controles button,
+  .atividade button,
+  .botao-concluir {
+    transition: none !important;
+  }
+  *, *::before, *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}

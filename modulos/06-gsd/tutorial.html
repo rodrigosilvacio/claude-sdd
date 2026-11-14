@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tutorial de GSD | Curso de Spec-Driven Development</title>
+  <meta name="description" content="Tutorial do GSD: instalação com npx, início com /gsd-new-project ou /gsd-onboard e o laço Discuss, Plan, Execute, Verify e Ship.">
+  <link rel="stylesheet" href="../../assets/css/tokens.css">
+  <link rel="stylesheet" href="../../assets/css/base.css">
+  <link rel="stylesheet" href="../../assets/css/layout.css">
+  <link rel="stylesheet" href="../../assets/css/visuais.css">
+  <script type="module" src="../../assets/js/app.js"></script>
+</head>
+<body data-modulo="gsd">
+  <header>
+    <nav class="menu" data-componente="menu" aria-label="Principal">
+      <button type="button" class="menu-botao" aria-expanded="false" aria-controls="menu-lista">Menu</button>
+      <ul class="menu-lista" id="menu-lista">
+        <li><a href="../../index.html">Início</a></li>
+        <li><a href="../01-fundamentos/index.html" data-modulo="fundamentos">Fundamentos</a></li>
+        <li><a href="../02-openspec/index.html" data-modulo="openspec">OpenSpec</a></li>
+        <li><a href="../03-spec-kit/index.html" data-modulo="spec-kit">Spec Kit</a></li>
+        <li><a href="../04-bmad/index.html" data-modulo="bmad">BMAD</a></li>
+        <li><a href="../05-kiro/index.html" data-modulo="kiro">Kiro</a></li>
+        <li><a href="../06-gsd/index.html" data-modulo="gsd">GSD</a></li>
+        <li><a href="../07-spec-kitty/index.html" data-modulo="spec-kitty">Spec Kitty</a></li>
+        <li><a href="../08-specweave/index.html" data-modulo="specweave">SpecWeave</a></li>
+        <li><a href="../09-complementares/index.html" data-modulo="complementares">Complementares</a></li>
+        <li><a href="../../comparador.html">Comparador</a></li>
+        <li><a href="../../certificado.html">Certificado</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container" id="conteudo">
+    <h1>Tutorial de GSD</h1>
+    <p>O GSD é um sistema de meta-prompting, engenharia de contexto e SDD. Cada fase do projeto percorre um laço de cinco etapas: Discuss, Plan, Execute, Verify e Ship. Os artefatos citados na fonte oficial são <code>STATE.md</code> e <code>CONTEXT.md</code>.</p>
+    <p class="aviso"><strong>Projeto_Exemplo:</strong> este tutorial usa o projeto “Lista de Tarefas” como exemplo.</p>
+
+    <section aria-labelledby="sec-fontes">
+      <h2 id="sec-fontes">Fonte oficial e dados consultados</h2>
+      <ul>
+        <li>Fonte oficial: <a href="https://github.com/open-gsd/gsd-core">open-gsd/gsd-core</a>.</li>
+        <li>Repositório antigo: <a href="https://github.com/gsd-build/get-shit-done">gsd-build/get-shit-done</a>.</li>
+        <li>Data da consulta: 14/11/2026.</li>
+        <li>Versão: versão não informada na fonte.</li>
+        <li>Licença: MIT.</li>
+      </ul>
+      <p class="aviso"><strong>Mudança de repositório:</strong> a página do repositório antigo informa que o projeto passou para <code>open-gsd/gsd-core</code>. A URL oficial do GSD deve ser confirmada pelo mantenedor do curso antes da publicação.</p>
+    </section>
+
+    <section aria-labelledby="sec-ciclo">
+      <h2 id="sec-ciclo">O laço do GSD</h2>
+      <p>O laço tem cinco etapas, repetidas a cada fase do projeto.</p>
+
+      <figure class="visual diagrama" data-ferramenta="gsd">
+        <svg viewBox="0 0 800 100" role="img" aria-labelledby="df-titulo df-desc">
+          <title id="df-titulo">Laço do GSD</title>
+          <desc id="df-desc">Cinco etapas em sequência: 1 Discuss, 2 Plan, 3 Execute, 4 Verify e 5 Ship.</desc>
+          <defs>
+            <marker id="df-seta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 z"/>
+            </marker>
+          </defs>
+          <g class="etapa" transform="translate(10,20)"><rect width="140" height="60" rx="8"/><text x="70" y="35">1. Discuss</text></g>
+          <path class="seta" d="M154 50 H166" marker-end="url(#df-seta)"/>
+          <g class="etapa" transform="translate(170,20)"><rect width="140" height="60" rx="8"/><text x="70" y="35">2. Plan</text></g>
+          <path class="seta" d="M314 50 H326" marker-end="url(#df-seta)"/>
+          <g class="etapa" transform="translate(330,20)"><rect width="140" height="60" rx="8"/><text x="70" y="35">3. Execute</text></g>
+          <path class="seta" d="M474 50 H486" marker-end="url(#df-seta)"/>
+          <g class="etapa" transform="translate(490,20)"><rect width="140" height="60" rx="8"/><text x="70" y="35">4. Verify</text></g>
+          <path class="seta" d="M634 50 H646" marker-end="url(#df-seta)"/>
+          <g class="etapa" transform="translate(650,20)"><rect width="140" height="60" rx="8"/><text x="70" y="35">5. Ship</text></g>
+        </svg>
+        <figcaption>Laço de cinco etapas do GSD por fase.</figcaption>
+        <ol class="alt-textual">
+          <li>Discuss.</li>
+          <li>Plan.</li>
+          <li>Execute.</li>
+          <li>Verify.</li>
+          <li>Ship.</li>
+        </ol>
+      </figure>
+    </section>
+
+    <section aria-labelledby="sec-linha">
+      <h2 id="sec-linha">Linha do tempo de uma fase</h2>
+      <p>Uma fase percorre as cinco etapas na ordem abaixo.</p>
+      <ol class="linha-tempo" aria-label="Etapas de uma fase do GSD">
+        <li><strong>Discuss</strong> Primeira etapa da fase.</li>
+        <li><strong>Plan</strong> Segunda etapa da fase.</li>
+        <li><strong>Execute</strong> Terceira etapa da fase.</li>
+        <li><strong>Verify</strong> Quarta etapa da fase.</li>
+        <li><strong>Ship</strong> Quinta e última etapa da fase.</li>
+      </ol>
+    </section>
+
+    <section aria-labelledby="sec-inicio">
+      <h2 id="sec-inicio">Como começar</h2>
+      <p>Em um projeto novo, use <code>/gsd-new-project</code>. Em um código que já existe, use <code>/gsd-onboard</code>. O instalador pergunta qual runtime você usa e se a instalação é global ou local. Entre os agentes citados na fonte estão Claude Code, OpenCode, Antigravity CLI, Kimi CLI, Kilo, Codex, Copilot, Cursor e Windsurf, entre outros.</p>
+    </section>
+
+    <section aria-labelledby="sec-passos">
+      <h2 id="sec-passos">Passo a passo</h2>
+      <p>Use os botões Anterior e Próximo para percorrer os sete passos.</p>
+
+      <ol class="stepper" data-componente="stepper" aria-label="Passo a passo do GSD">
+        <li data-titulo="Instalar o GSD Core"><strong>Instalar o GSD Core</strong> O instalador pergunta o runtime e se a instalação é global ou local. Comando:
+          <div class="bloco-codigo">
+            <pre><code class="comando" id="cmd-instalar">npx @opengsd/gsd-core@latest</code></pre>
+            <button type="button" data-componente="copiar" data-alvo="cmd-instalar" hidden disabled>Copiar comando</button>
+          </div>
+        </li>
+        <li data-titulo="Iniciar um projeto novo"><strong>Iniciar um projeto novo</strong> Para código existente, use <code>/gsd-onboard</code>. Comando:
+          <div class="bloco-codigo">
+            <pre><code class="comando" id="cmd-novo">/gsd-new-project</code></pre>
+            <button type="button" data-componente="copiar" data-alvo="cmd-novo" hidden disabled>Copiar comando</button>
+          </div>
+        </li>
+        <li data-titulo="Discuss"><strong>Discuss</strong> Primeira etapa do laço da fase.</li>
+        <li data-titulo="Plan"><strong>Plan</strong> Segunda etapa do laço da fase.</li>
+        <li data-titulo="Execute"><strong>Execute</strong> Terceira etapa do laço da fase.</li>
+        <li data-titulo="Verify"><strong>Verify</strong> Quarta etapa do laço da fase.</li>
+        <li data-titulo="Ship"><strong>Ship</strong> Quinta etapa do laço da fase.</li>
+      </ol>
+    </section>
+
+    <section aria-labelledby="sec-estrutura">
+      <h2 id="sec-estrutura">Estrutura de arquivos</h2>
+      <p>A fonte cita estes dois artefatos.</p>
+
+      <figure class="visual mockup">
+        <ul aria-label="Estrutura de arquivos de um projeto com GSD">
+          <li><code>projeto/</code>
+            <ul>
+              <li><code>STATE.md</code></li>
+              <li><code>CONTEXT.md</code></li>
+            </ul>
+          </li>
+        </ul>
+        <figcaption><span class="selo">Ilustrativo</span> Os nomes dos arquivos vêm da <a href="https://github.com/open-gsd/gsd-core">fonte oficial</a>; a pasta externa é genérica.</figcaption>
+      </figure>
+    </section>
+
+    <section aria-labelledby="sec-cartao">
+      <h2 id="sec-cartao">Cartão comparativo</h2>
+      <article style="--cor-ferramenta:#9b1c31" data-ferramenta="gsd" class="cartao"><h3><img height="40" width="40" aria-hidden="true" alt="" src="../../assets/svg/gsd.svg"><span>GSD</span></h3><p>Sistema de meta-prompting, engenharia de contexto e SDD, em laço de cinco etapas por fase.</p><dl><dt>Instalação</dt><dd><code>npx @opengsd/gsd-core@latest</code></dd><dt>Agentes suportados</dt><dd>Claude Code, OpenCode, Antigravity CLI, Kimi CLI, Kilo, Codex, Copilot, Cursor, Windsurf</dd><dt>Artefatos principais</dt><dd><code>STATE.md</code>, <code>CONTEXT.md</code></dd><dt>Versão</dt><dd>versão não informada na fonte</dd><dt>Licença</dt><dd>MIT</dd><dt>Custo</dt><dd>verificar na fonte</dd><dt>Fonte oficial</dt><dd><a rel="noopener noreferrer" href="https://github.com/open-gsd/gsd-core">https://github.com/open-gsd/gsd-core</a></dd><dt>Data da consulta</dt><dd>14/11/2026</dd></dl></article>
+    </section>
+    <section class="concluir" aria-label="Conclusão da lição">
+      <button type="button" class="botao-concluir" data-componente="botao-concluir" data-licao="licao:gsd/tutorial" aria-pressed="false" disabled>Marcar como concluída</button>
+    </section>
+
+    <nav class="navegacao-licao" aria-label="Navegação entre lições">
+      <a rel="prev" href="index.html">&larr; Índice do módulo</a>
+      <a rel="next" href="exercicio.html">Próximo: Exercício de GSD &rarr;</a>
+    </nav>
+  </main>
+</body>
+</html>

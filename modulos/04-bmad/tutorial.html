@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tutorial de BMAD Method | Curso de Spec-Driven Development</title>
+  <meta name="description" content="Tutorial do BMAD Method com o Projeto_Exemplo Lista de Tarefas: pré-requisitos, instalação com npx bmad-method install e invocação de bmad-help e bmad-build.">
+  <link rel="stylesheet" href="../../assets/css/tokens.css">
+  <link rel="stylesheet" href="../../assets/css/base.css">
+  <link rel="stylesheet" href="../../assets/css/layout.css">
+  <link rel="stylesheet" href="../../assets/css/visuais.css">
+  <script type="module" src="../../assets/js/app.js"></script>
+</head>
+<body data-modulo="bmad">
+  <header>
+    <nav class="menu" data-componente="menu" aria-label="Principal">
+      <button type="button" class="menu-botao" aria-expanded="false" aria-controls="menu-lista">Menu</button>
+      <ul class="menu-lista" id="menu-lista">
+        <li><a href="../../index.html">Início</a></li>
+        <li><a href="../01-fundamentos/index.html" data-modulo="fundamentos">Fundamentos</a></li>
+        <li><a href="../02-openspec/index.html" data-modulo="openspec">OpenSpec</a></li>
+        <li><a href="../03-spec-kit/index.html" data-modulo="spec-kit">Spec Kit</a></li>
+        <li><a href="../04-bmad/index.html" data-modulo="bmad">BMAD</a></li>
+        <li><a href="../05-kiro/index.html" data-modulo="kiro">Kiro</a></li>
+        <li><a href="../06-gsd/index.html" data-modulo="gsd">GSD</a></li>
+        <li><a href="../07-spec-kitty/index.html" data-modulo="spec-kitty">Spec Kitty</a></li>
+        <li><a href="../08-specweave/index.html" data-modulo="specweave">SpecWeave</a></li>
+        <li><a href="../09-complementares/index.html" data-modulo="complementares">Complementares</a></li>
+        <li><a href="../../comparador.html">Comparador</a></li>
+        <li><a href="../../certificado.html">Certificado</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container" id="conteudo">
+    <h1>Tutorial de BMAD Method</h1>
+    <p><strong>Aviso:</strong> este tutorial usa o Projeto_Exemplo “Lista de Tarefas”, o mesmo dos outros módulos. Os comandos abaixo foram copiados da fonte oficial.</p>
+
+    <section aria-labelledby="sec-fonte">
+      <h2 id="sec-fonte">Fonte oficial e versão</h2>
+      <ul>
+        <li>Fonte oficial: <a href="https://github.com/bmad-code-org/BMAD-METHOD">repositório do BMAD Method</a>.</li>
+        <li>Data_Consulta: 14/11/2026.</li>
+        <li>Versão: v6.12 (estável); v7 em preview alpha.</li>
+        <li>Licença: MIT.</li>
+        <li>Agentes de IA: a fonte consultada fala apenas em “ferramenta de IA” e não traz uma lista de agentes suportados (lista não informada na fonte).</li>
+      </ul>
+      <p>Este tutorial usa a versão estável v6.12. A linha v7 está em preview alpha e não é usada aqui.</p>
+    </section>
+
+    <section aria-labelledby="sec-fluxo">
+      <h2 id="sec-fluxo">O fluxo em três etapas</h2>
+      <p>Com o BMAD Method você instala o método, pede ajuda com <code>bmad-help</code> e constrói com <code>bmad-build</code>, sempre dentro da sua ferramenta de IA.</p>
+
+      <figure class="visual diagrama" data-ferramenta="bmad">
+        <svg viewBox="0 0 560 100" role="img" aria-labelledby="df-titulo df-desc">
+          <title id="df-titulo">Fluxo do BMAD Method</title>
+          <desc id="df-desc">Três etapas em sequência: 1 instalar, 2 pedir ajuda e 3 construir.</desc>
+          <defs>
+            <marker id="df-seta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 z"/>
+            </marker>
+          </defs>
+          <g class="etapa" transform="translate(10,20)"><rect width="160" height="60" rx="8"/><text x="80" y="35">1. Instalar</text></g>
+          <path class="seta" d="M174 50 H196" marker-end="url(#df-seta)"/>
+          <g class="etapa" transform="translate(200,20)"><rect width="160" height="60" rx="8"/><text x="80" y="35">2. Pedir ajuda</text></g>
+          <path class="seta" d="M364 50 H386" marker-end="url(#df-seta)"/>
+          <g class="etapa" transform="translate(390,20)"><rect width="160" height="60" rx="8"/><text x="80" y="35">3. Construir</text></g>
+        </svg>
+        <figcaption>Fluxo do BMAD Method: instalar, pedir ajuda e construir.</figcaption>
+        <ol class="alt-textual">
+          <li>Instalar: <code>npx bmad-method install</code>.</li>
+          <li>Pedir ajuda: <code>bmad-help</code> na ferramenta de IA.</li>
+          <li>Construir: <code>bmad-build</code> na ferramenta de IA.</li>
+        </ol>
+      </figure>
+
+      <ol class="linha-tempo" aria-label="Etapas do BMAD Method em ordem">
+        <li><strong>Instalar</strong> Instala a versão estável v6.12.</li>
+        <li><strong>Pedir ajuda</strong> Invoca <code>bmad-help</code> na ferramenta de IA.</li>
+        <li><strong>Construir</strong> Invoca <code>bmad-build</code> na ferramenta de IA.</li>
+      </ol>
+    </section>
+
+    <section aria-labelledby="sec-pre">
+      <h2 id="sec-pre">Pré-requisitos</h2>
+      <p>A fonte oficial pede Node.js 20.12 ou superior e Python 3.10 ou superior. O <code>uv</code> também é necessário. Tenha ainda uma ferramenta de IA, na qual você invoca os comandos do BMAD Method.</p>
+    </section>
+
+    <section aria-labelledby="sec-instalacao">
+      <h2 id="sec-instalacao">Instalação</h2>
+      <p>Na pasta do Projeto_Exemplo, execute o comando abaixo para instalar a versão estável v6.12.</p>
+      <div class="bloco-codigo">
+        <pre id="cmd-instalar" data-comando>npx bmad-method install</pre>
+        <button type="button" data-componente="copiar" data-alvo="cmd-instalar" hidden disabled>Copiar</button>
+      </div>
+    </section>
+
+    <section aria-labelledby="sec-passos">
+      <h2 id="sec-passos">Passo a passo</h2>
+      <p>Siga os quatro passos na ordem. Use Anterior e Próximo para navegar.</p>
+      <ol class="stepper" data-componente="stepper">
+        <li data-titulo="Conferir os pré-requisitos">
+          <strong>Conferir os pré-requisitos</strong>
+          <p>Node.js 20.12+ e Python 3.10+; o <code>uv</code> é necessário.</p>
+        </li>
+        <li data-titulo="Instalar a versão estável v6.12">
+          <strong>Instalar a versão estável v6.12</strong>
+          <div class="bloco-codigo">
+            <pre id="cmd-passo-instalar" data-comando>npx bmad-method install</pre>
+            <button type="button" data-componente="copiar" data-alvo="cmd-passo-instalar" hidden disabled>Copiar</button>
+          </div>
+        </li>
+        <li data-titulo="Invocar bmad-help na ferramenta de IA">
+          <strong>Invocar bmad-help na ferramenta de IA</strong>
+          <div class="bloco-codigo">
+            <pre id="cmd-help" data-comando>bmad-help</pre>
+            <button type="button" data-componente="copiar" data-alvo="cmd-help" hidden disabled>Copiar</button>
+          </div>
+        </li>
+        <li data-titulo="Invocar bmad-build na ferramenta de IA">
+          <strong>Invocar bmad-build na ferramenta de IA</strong>
+          <div class="bloco-codigo">
+            <pre id="cmd-build" data-comando>bmad-build</pre>
+            <button type="button" data-componente="copiar" data-alvo="cmd-build" hidden disabled>Copiar</button>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section aria-labelledby="sec-estrutura">
+      <h2 id="sec-estrutura">Estrutura de arquivos</h2>
+      <p>A fonte consultada não descreve a estrutura de pastas e arquivos criada pelo BMAD Method. Por isso este tutorial não mostra um mockup dessa estrutura.</p>
+    </section>
+
+    <section aria-labelledby="sec-resultado">
+      <h2 id="sec-resultado">Resultado esperado</h2>
+      <p>Ao final, o BMAD Method v6.12 está instalado e você invocou <code>bmad-help</code> e <code>bmad-build</code> na sua ferramenta de IA, usando o Projeto_Exemplo “Lista de Tarefas”.</p>
+    </section>
+
+    <section aria-labelledby="sec-problemas">
+      <h2 id="sec-problemas">Solução de problemas comuns</h2>
+      <p>A fonte consultada não traz uma seção de solução de problemas. Se a instalação falhar, confira primeiro os pré-requisitos: Node.js 20.12+, Python 3.10+ e <code>uv</code>. Depois consulte o <a href="https://github.com/bmad-code-org/BMAD-METHOD">repositório oficial</a>.</p>
+    </section>
+
+    <section aria-labelledby="sec-cartao">
+      <h2 id="sec-cartao">Cartão comparativo</h2>
+      <article style="--cor-ferramenta:#7a3e00" data-ferramenta="bmad" class="cartao"><h3><img height="40" width="40" aria-hidden="true" alt="" src="../../assets/svg/bmad.svg"><span>BMAD Method</span></h3><p>Método com módulos oficiais (BMad Builder, Test Architect, entre outros) invocados na ferramenta de IA.</p><dl><dt>Instalação</dt><dd><code>npx bmad-method install</code></dd><dt>Agentes suportados</dt><dd>verificar na fonte</dd><dt>Artefatos principais</dt><dd>verificar na fonte</dd><dt>Versão</dt><dd>v6.12 (estável); v7 em preview alpha</dd><dt>Licença</dt><dd>MIT</dd><dt>Custo</dt><dd>verificar na fonte</dd><dt>Fonte oficial</dt><dd><a rel="noopener noreferrer" href="https://github.com/bmad-code-org/BMAD-METHOD">https://github.com/bmad-code-org/BMAD-METHOD</a></dd><dt>Data da consulta</dt><dd>14/11/2026</dd></dl></article>
+    </section>
+    <section class="concluir" aria-label="Conclusão da lição">
+      <button type="button" class="botao-concluir" data-componente="botao-concluir" data-licao="licao:bmad/tutorial" aria-pressed="false" disabled>Marcar como concluída</button>
+    </section>
+
+    <nav class="navegacao-licao" aria-label="Navegação entre lições">
+      <a rel="prev" href="index.html">&larr; Índice do módulo</a>
+      <a rel="next" href="exercicio.html">Próximo: Exercício &rarr;</a>
+    </nav>
+  </main>
+</body>
+</html>
