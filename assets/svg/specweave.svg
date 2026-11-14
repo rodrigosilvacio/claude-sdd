@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" role="img" aria-labelledby="t-specweave" fill="none" stroke="#8a4b00" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+  <title id="t-specweave">Ícone do SpecWeave</title>
+  <symbol id="icone-specweave" viewBox="0 0 48 48">
+    <rect x="3" y="3" width="42" height="42" rx="9" stroke="#8a4b00"/>
+    <path d="M12 16c6-6 8 6 12 0s6 6 12 0M12 26c6-6 8 6 12 0s6 6 12 0M12 36c6-6 8 6 12 0s6 6 12 0"/>
+  </symbol>
+  <use href="#icone-specweave" width="48" height="48"/>
+</svg>

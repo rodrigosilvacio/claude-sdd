@@ -1,0 +1,150 @@
+/* Layout do Comparador (comparador.html). Usa apenas tokens de tokens.css.
+   Tabelas e cartões reaproveitam .tabela-rolagem e .cartoes de visuais.css.
+   Sem rolagem horizontal da página de 320 a 1920 px (R11.7): todo filho de grid
+   tem min-width: 0 e a rolagem fica dentro do contêiner da tabela. */
+
+.comparador {
+  display: grid;
+  gap: var(--espaco-5);
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 100%;
+}
+.comparador > * { min-width: 0; }
+
+/* ---------- Seleção ---------- */
+.comparador-selecao {
+  margin: 0;
+  padding: var(--espaco-4);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  background: var(--cor-superficie);
+}
+.comparador-selecao legend { padding: 0 var(--espaco-2); font-weight: 700; }
+.comparador-opcoes {
+  display: grid;
+  gap: var(--espaco-2);
+  margin: var(--espaco-3) 0 0;
+  padding: 0;
+  list-style: none;
+  grid-template-columns: minmax(0, 1fr);
+}
+.comparador-opcao {
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-3);
+  min-height: 2.75rem;
+  padding: var(--espaco-2) var(--espaco-3);
+  background: var(--cor-fundo);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  cursor: pointer;
+  overflow-wrap: anywhere;
+}
+.comparador-opcao input[type="checkbox"] {
+  flex: none;
+  width: 1.5rem;
+  height: 1.5rem;
+  margin: 0;
+  accent-color: var(--cor-destaque);
+}
+.comparador-opcao:has(input:checked) {
+  border-width: 2px;
+  font-weight: 700;
+}
+.comparador-opcao:has(input:focus-visible) {
+  outline: 3px solid var(--cor-foco);
+  outline-offset: 2px;
+}
+.comparador-opcao img,
+.comparador-opcao svg.icone { width: 2rem; height: 2rem; flex: none; }
+
+/* Mensagens de limite e de mínimo: borda e texto, não só cor */
+.comparador-mensagem {
+  margin: var(--espaco-3) 0 0;
+  padding: var(--espaco-2) var(--espaco-3);
+  border-left: 6px solid var(--cor-foco);
+  background: var(--cor-fundo);
+  font-weight: 600;
+}
+.comparador-mensagem:empty { display: none; }
+
+/* ---------- Perfil_Projeto e recomendação ---------- */
+.comparador-perfil {
+  display: grid;
+  gap: var(--espaco-3);
+  grid-template-columns: minmax(0, 1fr);
+  padding: var(--espaco-4);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+}
+.comparador-perfil label { display: block; font-weight: 600; }
+.comparador-perfil select,
+.comparador-perfil input {
+  width: 100%;
+  max-width: 100%;
+  min-height: 2.75rem;
+  padding: var(--espaco-2) var(--espaco-3);
+  font: inherit;
+  color: var(--cor-texto);
+  background: var(--cor-fundo);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+}
+.comparador-recomendacao {
+  padding: var(--espaco-3) var(--espaco-4);
+  border-left: 6px solid var(--cor-destaque);
+  background: var(--cor-superficie);
+}
+.comparador-recomendacao:empty { display: none; }
+
+/* ---------- Tabela ---------- */
+.comparador-tabela[hidden] { display: none; }
+.comparador-tabela table { min-width: 40rem; }
+.comparador-tabela th[scope="row"] { background: var(--cor-superficie); white-space: nowrap; }
+.comparador-tabela td.numero { text-align: right; font-variant-numeric: tabular-nums; }
+.comparador-aviso { color: var(--cor-texto-suave); font-size: 0.9375rem; }
+.comparador-consulta { color: var(--cor-texto-suave); font-size: 0.9375rem; }
+
+/* ---------- Gráfico (SVG com viewBox) ---------- */
+.comparador-grafico[hidden] { display: none; }
+.comparador-grafico {
+  margin: 0;
+  padding: var(--espaco-4);
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio);
+  background: var(--cor-fundo);
+}
+.comparador-grafico svg {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+.comparador-grafico svg text { fill: var(--cor-texto); font-family: var(--fonte-texto); }
+.comparador-legenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--espaco-2) var(--espaco-4);
+  margin: var(--espaco-3) 0 0;
+  padding: 0;
+  list-style: none;
+}
+.comparador-legenda li { display: flex; align-items: center; gap: var(--espaco-2); }
+.comparador-legenda img,
+.comparador-legenda svg { width: 1.5rem; height: 1.5rem; flex: none; }
+
+/* ---------- Cartões das ferramentas selecionadas ---------- */
+.comparador-cartoes.cartoes { margin: 0; padding: 0; list-style: none; }
+.comparador-cartoes > * { min-width: 0; overflow-wrap: anywhere; }
+
+/* ---------- Telas médias e grandes ---------- */
+@media (min-width: 600px) {
+  .comparador-opcoes { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .comparador-perfil { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (min-width: 1024px) {
+  .comparador-opcoes { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .comparador-perfil { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .comparador-grafico svg { max-width: 48rem; }
+}

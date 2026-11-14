@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" role="img" aria-labelledby="t-gsd" fill="none" stroke="#9b1c31" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+  <title id="t-gsd">Ícone do GSD</title>
+  <symbol id="icone-gsd" viewBox="0 0 48 48">
+    <rect x="3" y="3" width="42" height="42" rx="9" stroke="#9b1c31"/>
+    <path d="M13 25l7 7 15-16"/>
+  </symbol>
+  <use href="#icone-gsd" width="48" height="48"/>
+</svg>

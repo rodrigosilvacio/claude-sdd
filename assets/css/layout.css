@@ -1,0 +1,74 @@
+.container {
+  width: 100%;
+  max-width: var(--largura-max);
+  margin-inline: auto;
+  padding-inline: var(--espaco-4);
+}
+
+main { display: block; min-width: 0; }
+
+/* Tabelas largas rolam dentro do próprio contêiner, nunca na página. */
+.tabela-rolavel { max-width: 100%; overflow-x: auto; }
+
+/* Menu: recolhido abaixo de 768 px (JS controla [hidden]); sem JS fica expandido. */
+.menu { background: var(--cor-superficie); border-bottom: 1px solid var(--cor-borda); }
+
+.menu-botao {
+  display: block;
+  width: 100%;
+  min-height: 2.75rem;
+  padding: var(--espaco-2) var(--espaco-4);
+  font: inherit;
+  color: var(--cor-texto);
+  background: transparent;
+  border: 0;
+  text-align: left;
+  cursor: pointer;
+}
+
+.menu-lista {
+  display: block;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.menu-lista[hidden] { display: none; }
+
+.menu-lista a {
+  display: block;
+  padding: var(--espaco-3) var(--espaco-4);
+  overflow-wrap: anywhere;
+}
+
+.menu-lista [aria-current="page"] { font-weight: 700; }
+
+/* Expandido a partir de 768 px, mesmo que [hidden] esteja presente. */
+@media (min-width: 768px) {
+  .menu-botao { display: none; }
+  .menu-lista, .menu-lista[hidden] {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--espaco-1);
+  }
+  .menu-lista a { padding: var(--espaco-3) var(--espaco-4); }
+}
+
+@media (min-width: 1200px) {
+  .container { padding-inline: var(--espaco-6); }
+}
+
+/* Destaque do Módulo atual e selo textual "concluída" (R3.3, R3.4) */
+.menu-lista .modulo-atual { font-weight: 700; text-decoration: underline; }
+.selo-concluida { font-size: 0.875em; font-weight: 600; }
+/* Navegação anterior/próxima entre lições (R3.2) */
+.navegacao-licao {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--espaco-3);
+  margin: var(--espaco-6) 0;
+  padding-top: var(--espaco-4);
+  border-top: 1px solid var(--cor-borda);
+}
+.navegacao-licao a { padding: var(--espaco-2) 0; }

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Comparador de ferramentas | Curso de SDD</title>
+  <meta name="description" content="Compare as sete ferramentas de Spec-Driven Development e veja qual combina com o seu projeto.">
+  <link rel="stylesheet" href="assets/css/tokens.css">
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/layout.css">
+  <link rel="stylesheet" href="assets/css/visuais.css">
+  <link rel="stylesheet" href="assets/css/comparador.css">
+  <script type="module" src="assets/js/app.js"></script>
+</head>
+<body>
+  <a href="#conteudo">Pular para o conteúdo</a>
+
+  <div data-componente="avisos-progresso" role="status"></div>
+
+  <header>
+    <nav class="menu" data-componente="menu" aria-label="Principal">
+      <button type="button" class="menu-botao" aria-expanded="true" aria-controls="menu-lista">Menu</button>
+      <ul class="menu-lista" id="menu-lista">
+        <li><a href="index.html">Início</a></li>
+        <li><a href="modulos/01-fundamentos/index.html" data-modulo="fundamentos">Fundamentos de SDD</a></li>
+        <li><a href="modulos/02-openspec/index.html" data-modulo="openspec">OpenSpec</a></li>
+        <li><a href="modulos/03-spec-kit/index.html" data-modulo="spec-kit">GitHub Spec Kit</a></li>
+        <li><a href="modulos/04-bmad/index.html" data-modulo="bmad">BMAD Method</a></li>
+        <li><a href="modulos/05-kiro/index.html" data-modulo="kiro">AWS Kiro</a></li>
+        <li><a href="modulos/06-gsd/index.html" data-modulo="gsd">GSD</a></li>
+        <li><a href="modulos/07-spec-kitty/index.html" data-modulo="spec-kitty">Spec Kitty</a></li>
+        <li><a href="modulos/08-specweave/index.html" data-modulo="specweave">SpecWeave</a></li>
+        <li><a href="modulos/09-complementares/index.html" data-modulo="complementares">Ferramentas complementares</a></li>
+        <li><a href="comparador.html" aria-current="page">Comparador</a></li>
+        <li><a href="certificado.html">Certificado</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="conteudo" class="container">
+    <h1>Comparador de ferramentas SDD</h1>
+    <p>Escolha de 2 a 4 ferramentas para ver a tabela, o gráfico e os cartões comparativos. Informe o perfil do seu projeto para receber uma recomendação.</p>
+    <p class="aviso-editorial">As notas do gráfico são uma avaliação editorial do curso, não uma medição oficial. Os critérios de cada nota estão listados no arquivo de dados <code>assets/data/criterios.js</code>. Licença, custo e agentes suportados seguem a fonte oficial de cada ferramenta, com a data da consulta.</p>
+    <div data-componente="comparador">
+      <noscript><p>O comparador interativo precisa de JavaScript. Ative o JavaScript no navegador ou consulte o tutorial de cada ferramenta nos módulos do curso.</p></noscript>
+    </div>
+  </main>
+</body>
+</html>

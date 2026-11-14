@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" role="img" aria-labelledby="t-bmad" fill="none" stroke="#7a3e00" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+  <title id="t-bmad">Ícone do BMAD</title>
+  <symbol id="icone-bmad" viewBox="0 0 48 48">
+    <rect x="3" y="3" width="42" height="42" rx="9" stroke="#7a3e00"/>
+    <circle cx="24" cy="17" r="5"/><circle cx="14" cy="33" r="4"/><circle cx="34" cy="33" r="4"/><path d="M21 21l-5 8M27 21l5 8"/>
+  </symbol>
+  <use href="#icone-bmad" width="48" height="48"/>
+</svg>

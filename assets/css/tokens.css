@@ -1,0 +1,30 @@
+/* Tokens de projeto. Razões de contraste calculadas (WCAG):
+   texto: --cor-texto/--cor-fundo 16,9:1; --cor-texto-suave/--cor-fundo 7,9:1;
+   --cor-link/--cor-fundo 8,0:1; --cor-foco/--cor-fundo 8,0:1 (mín. 3:1);
+   --cor-borda/--cor-fundo 3,8:1 (mín. 3:1); texto branco sobre --cor-destaque 8,0:1. */
+:root {
+  --cor-fundo: #ffffff;
+  --cor-superficie: #f3f5f8;
+  --cor-texto: #1a1d21;
+  --cor-texto-suave: #4a5260;
+  --cor-link: #0b4f9c;
+  --cor-destaque: #0b4f9c;
+  --cor-texto-destaque: #ffffff;
+  --cor-foco: #0b4f9c;
+  --cor-borda: #7a8494;
+
+  --espaco-1: 0.25rem;
+  --espaco-2: 0.5rem;
+  --espaco-3: 0.75rem;
+  --espaco-4: 1rem;
+  --espaco-5: 1.5rem;
+  --espaco-6: 2rem;
+  --espaco-7: 3rem;
+
+  --fonte-texto: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --fonte-codigo: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+
+  --largura-max: 72rem;
+  --raio: 0.5rem;
+  --duracao: 200ms;
+}

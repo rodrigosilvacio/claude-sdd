@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Tutorial de SpecWeave | Curso de Spec-Driven Development</title>
+  <meta name="description" content="Tutorial do SpecWeave: incrementos com critérios de aceite e tarefas rastreados, passagem de bastão, verificação e revisão.">
+  <link rel="stylesheet" href="../../assets/css/tokens.css">
+  <link rel="stylesheet" href="../../assets/css/base.css">
+  <link rel="stylesheet" href="../../assets/css/layout.css">
+  <link rel="stylesheet" href="../../assets/css/visuais.css">
+  <script type="module" src="../../assets/js/app.js"></script>
+</head>
+<body data-modulo="specweave">
+  <header>
+    <nav class="menu" data-componente="menu" aria-label="Principal">
+      <button type="button" class="menu-botao" aria-expanded="false" aria-controls="menu-lista">Menu</button>
+      <ul class="menu-lista" id="menu-lista">
+        <li><a href="../../index.html">Início</a></li>
+        <li><a href="../01-fundamentos/index.html" data-modulo="fundamentos">Fundamentos</a></li>
+        <li><a href="../02-openspec/index.html" data-modulo="openspec">OpenSpec</a></li>
+        <li><a href="../03-spec-kit/index.html" data-modulo="spec-kit">Spec Kit</a></li>
+        <li><a href="../04-bmad/index.html" data-modulo="bmad">BMAD</a></li>
+        <li><a href="../05-kiro/index.html" data-modulo="kiro">Kiro</a></li>
+        <li><a href="../06-gsd/index.html" data-modulo="gsd">GSD</a></li>
+        <li><a href="../07-spec-kitty/index.html" data-modulo="spec-kitty">Spec Kitty</a></li>
+        <li><a href="../08-specweave/index.html" data-modulo="specweave">SpecWeave</a></li>
+        <li><a href="../09-complementares/index.html" data-modulo="complementares">Complementares</a></li>
+        <li><a href="../../comparador.html">Comparador</a></li>
+        <li><a href="../../certificado.html">Certificado</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container" id="conteudo">
+    <h1>Tutorial de SpecWeave</h1>
+    <p>O SpecWeave organiza o trabalho em incrementos, com critérios de aceite e tarefas rastreados. O fluxo inclui passagem de bastão, verificação e revisão. O CLI é gratuito e a licença informada na fonte é MIT.</p>
+    <p class="aviso" role="note"><strong>Projeto_Exemplo:</strong> este tutorial usa o projeto “Lista de Tarefas”, o mesmo dos tutoriais das outras ferramentas, para que você possa comparar os fluxos.</p>
+
+    <section aria-labelledby="sec-fontes">
+      <h2 id="sec-fontes">Fonte oficial e versão</h2>
+      <ul>
+        <li>Fonte oficial: <a href="https://spec-weave.com">https://spec-weave.com</a>.</li>
+        <li>Data de consulta: 14/11/2026.</li>
+        <li>Versão verificada na fonte: 3.1.0 (17/10/2026).</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="sec-pre">
+      <h2 id="sec-pre">Pré-requisitos</h2>
+      <p>A instalação usa o npm, então ele precisa estar disponível no computador. A fonte lista estes agentes: Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilot CLI, Grok, OpenCode, Muse Code, Antigravity e Pi.</p>
+    </section>
+
+    <section aria-labelledby="sec-ciclo">
+      <h2 id="sec-ciclo">O ciclo do SpecWeave</h2>
+      <p>Depois de criar o incremento, o ciclo tem sete etapas: assumir a tarefa, concluí-la, passar o bastão, retomar, verificar, revisar e completar.</p>
+
+      <figure class="visual diagrama" data-ferramenta="specweave">
+        <svg viewBox="0 0 920 100" role="img" aria-labelledby="df-titulo df-desc">
+          <title id="df-titulo">Ciclo do SpecWeave</title>
+          <desc id="df-desc">Sete etapas em sequência: 1 assumir tarefa, 2 concluir tarefa, 3 passar o bastão, 4 retomar, 5 verificar, 6 revisar e 7 completar.</desc>
+          <defs>
+            <marker id="df-seta" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+              <path d="M0 0 L10 5 L0 10 z"/>
+            </marker>
+          </defs>
+          <g class="etapa" transform="translate(10,20)"><rect width="104" height="60" rx="8"/><text x="52" y="35">1. Assumir</text></g>
+          <path class="seta" d="M116 50 H134" marker-end="url(#df-seta)"/>
+          <g class="etapa" transform="translate(136,20)"><rect width="104" height="60" rx="8"/><text x="52" y="35">2. Concluir</text></g>
+          <path class="seta" d="M242 50 H260" marker-end="url(#df-seta)"/>
+          <g class="etapa" transform="translate(262,20)"><rect width="104" height="60" rx="8"/><text x="52" y="35">3. Bastão</text></g>
+          <path class="seta" d="M368 50 H386" marker-end="url(#df-seta)"/>
+          <g class="etapa" transform="translate(388,20)"><rect width="104" height="60" rx="8"/><text x="52" y="35">4. Retomar</text></g>
+          <path class="seta" d="M494 50 H512" marker-end="url(#df-seta)"/>
+          <g class="etapa" transform="translate(514,20)"><rect width="104" height="60" rx="8"/><text x="52" y="35">5. Verificar</text></g>
+          <path class="seta" d="M620 50 H638" marker-end="url(#df-seta)"/>
+          <g class="etapa" transform="translate(640,20)"><rect width="104" height="60" rx="8"/><text x="52" y="35">6. Revisar</text></g>
+          <path class="seta" d="M746 50 H764" marker-end="url(#df-seta)"/>
+          <g class="etapa" transform="translate(766,20)"><rect width="104" height="60" rx="8"/><text x="52" y="35">7. Completar</text></g>
+        </svg>
+        <figcaption>Ciclo do SpecWeave: da tarefa assumida ao incremento completado.</figcaption>
+        <ol class="alt-textual">
+          <li>Assumir tarefa: <code>specweave task claim T-01</code></li>
+          <li>Concluir tarefa: <code>specweave task done T-01 --run "npm test"</code></li>
+          <li>Passar o bastão: <code>specweave handoff</code></li>
+          <li>Retomar: <code>specweave pickup</code></li>
+          <li>Verificar: <code>specweave verify</code></li>
+          <li>Revisar: <code>specweave review</code></li>
+          <li>Completar: <code>specweave complete</code></li>
+        </ol>
+      </figure>
+    </section>
+
+    <section aria-labelledby="sec-linha">
+      <h2 id="sec-linha">Linha do tempo de um incremento</h2>
+      <p>Cada etapa deixa registros na pasta do incremento, que você pode revisar antes de seguir.</p>
+      <ol class="linha-tempo" aria-label="Etapas de um incremento do SpecWeave">
+        <li><strong>Assumir tarefa</strong> Registra no <code>ledger.jsonl</code> que você assumiu a tarefa <code>T-01</code>.</li>
+        <li><strong>Concluir tarefa</strong> Roda o teste informado em <code>--run</code> ao concluir.</li>
+        <li><strong>Passar o bastão</strong> Gera o <code>handoff.md</code> para quem continuar.</li>
+        <li><strong>Retomar</strong> Quem continua retoma o trabalho a partir do bastão.</li>
+        <li><strong>Verificar</strong> Gera os relatórios <code>verify.md</code> e <code>verify.json</code>.</li>
+        <li><strong>Revisar</strong> Gera um relatório de revisão, como <code>review-codex.md</code>.</li>
+        <li><strong>Completar</strong> Fecha o incremento.</li>
+      </ol>
+    </section>
+
+    <section aria-labelledby="sec-passos">
+      <h2 id="sec-passos">Instalação e passo a passo</h2>
+      <p>Siga os dez passos, na ordem, usando o botão Próximo. Cada comando tem um botão para copiar.</p>
+
+      <ol class="stepper" data-componente="stepper" aria-label="Passo a passo do SpecWeave">
+        <li data-titulo="Instalar o CLI">
+          <strong>Instalar o CLI</strong>
+          <p><code class="comando" id="cmd-1">npm install -g specweave</code> <button type="button" data-componente="copiar" data-alvo="cmd-1" hidden>Copiar</button></p>
+        </li>
+        <li data-titulo="Inicializar o projeto">
+          <strong>Inicializar o projeto</strong>
+          <p><code class="comando" id="cmd-2">specweave init</code> <button type="button" data-componente="copiar" data-alvo="cmd-2" hidden>Copiar</button></p>
+        </li>
+        <li data-titulo="Criar o incremento">
+          <strong>Criar o incremento</strong>
+          <p>Cria <code>.specweave/increments/0001-&lt;nome&gt;/</code>. Descreva o Projeto_Exemplo “Lista de Tarefas” no título.</p>
+          <p><code class="comando" id="cmd-3">specweave create-increment "&lt;título&gt;"</code> <button type="button" data-componente="copiar" data-alvo="cmd-3" hidden>Copiar</button></p>
+        </li>
+        <li data-titulo="Assumir uma tarefa">
+          <strong>Assumir uma tarefa</strong>
+          <p><code class="comando" id="cmd-4">specweave task claim T-01</code> <button type="button" data-componente="copiar" data-alvo="cmd-4" hidden>Copiar</button></p>
+        </li>
+        <li data-titulo="Concluir a tarefa com teste">
+          <strong>Concluir a tarefa com teste</strong>
+          <p><code class="comando" id="cmd-5">specweave task done T-01 --run "npm test"</code> <button type="button" data-componente="copiar" data-alvo="cmd-5" hidden>Copiar</button></p>
+        </li>
+        <li data-titulo="Passar o bastão">
+          <strong>Passar o bastão</strong>
+          <p><code class="comando" id="cmd-6">specweave handoff</code> <button type="button" data-componente="copiar" data-alvo="cmd-6" hidden>Copiar</button></p>
+        </li>
+        <li data-titulo="Retomar o trabalho">
+          <strong>Retomar o trabalho</strong>
+          <p><code class="comando" id="cmd-7">specweave pickup</code> <button type="button" data-componente="copiar" data-alvo="cmd-7" hidden>Copiar</button></p>
+        </li>
+        <li data-titulo="Verificar">
+          <strong>Verificar</strong>
+          <p><code class="comando" id="cmd-8">specweave verify</code> <button type="button" data-componente="copiar" data-alvo="cmd-8" hidden>Copiar</button></p>
+        </li>
+        <li data-titulo="Revisar">
+          <strong>Revisar</strong>
+          <p><code class="comando" id="cmd-9">specweave review</code> <button type="button" data-componente="copiar" data-alvo="cmd-9" hidden>Copiar</button></p>
+        </li>
+        <li data-titulo="Completar o incremento">
+          <strong>Completar o incremento</strong>
+          <p>Para ajustes pequenos, use <code>specweave small-fix "&lt;motivo&gt;"</code> em vez de um incremento.</p>
+          <p><code class="comando" id="cmd-10">specweave complete</code> <button type="button" data-componente="copiar" data-alvo="cmd-10" hidden>Copiar</button></p>
+        </li>
+      </ol>
+    </section>
+
+    <section aria-labelledby="sec-arvore">
+      <h2 id="sec-arvore">Resultado esperado</h2>
+      <p>Depois de criar o incremento e percorrer o ciclo, a pasta <code>.specweave/</code> fica com esta estrutura. Em <code>spec.md</code>, os critérios de aceite têm o formato <code>- [ ] AC-01:</code> e as tarefas começam com <code>### T-01</code>.</p>
+
+      <figure class="visual mockup">
+        <ul aria-label="Estrutura de pastas e arquivos do SpecWeave">
+          <li><code>.specweave/</code>
+            <ul>
+              <li><code>increments/</code>
+                <ul>
+                  <li><code>0001-&lt;nome&gt;/</code>
+                    <ul>
+                      <li><code>spec.md</code></li>
+                      <li><code>ledger.jsonl</code></li>
+                      <li><code>handoff.md</code></li>
+                      <li><code>reports/</code>
+                        <ul>
+                          <li><code>task-T-02.txt</code></li>
+                          <li><code>verify.md</code></li>
+                          <li><code>verify.json</code></li>
+                          <li><code>review-codex.md</code></li>
+                        </ul>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li><code>memory/</code>
+                <ul>
+                  <li><code>MEMORY.md</code></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
+        <figcaption><span class="selo">Ilustrativo</span> Estrutura conforme a <a href="https://spec-weave.com">fonte oficial</a>; <code>&lt;nome&gt;</code> é o nome do incremento.</figcaption>
+      </figure>
+    </section>
+
+    <section aria-labelledby="sec-problemas">
+      <h2 id="sec-problemas">Solução de problemas comuns</h2>
+      <ul>
+        <li>O comando <code>specweave</code> não é encontrado: confira se a instalação com <code>npm install -g specweave</code> terminou sem erro.</li>
+        <li>O ajuste é pequeno demais para um incremento: use <code>specweave small-fix "&lt;motivo&gt;"</code>.</li>
+        <li>Outros erros: consulte a <a href="https://spec-weave.com">fonte oficial</a>, que não lista outros problemas conhecidos na consulta feita.</li>
+      </ul>
+    </section>
+
+    <section aria-labelledby="sec-cartao">
+      <h2 id="sec-cartao">Cartão comparativo</h2>
+      <article style="--cor-ferramenta:#8a4b00" data-ferramenta="specweave" class="cartao"><h3><img height="40" width="40" aria-hidden="true" alt="" src="../../assets/svg/specweave.svg"><span>SpecWeave</span></h3><p>Incrementos com critérios de aceite e tarefas rastreados, com passagem de bastão, verificação e revisão.</p><dl><dt>Instalação</dt><dd><code>npm install -g specweave</code></dd><dt>Agentes suportados</dt><dd>Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilot CLI, Grok, OpenCode, Muse Code, Antigravity, Pi</dd><dt>Artefatos principais</dt><dd><code>.specweave/increments/0001-&lt;nome&gt;/spec.md</code>, <code>.specweave/increments/0001-&lt;nome&gt;/ledger.jsonl</code>, <code>.specweave/increments/0001-&lt;nome&gt;/handoff.md</code>, <code>.specweave/increments/0001-&lt;nome&gt;/reports/</code>, <code>.specweave/memory/MEMORY.md</code></dd><dt>Versão</dt><dd>3.1.0 (17/10/2026)</dd><dt>Licença</dt><dd>MIT</dd><dt>Custo</dt><dd>CLI gratuito</dd><dt>Fonte oficial</dt><dd><a rel="noopener noreferrer" href="https://spec-weave.com">https://spec-weave.com</a></dd><dt>Data da consulta</dt><dd>14/11/2026</dd></dl></article>
+    </section>
+    <section class="concluir" aria-label="Conclusão da lição">
+      <button type="button" class="botao-concluir" data-componente="botao-concluir" data-licao="licao:specweave/tutorial" aria-pressed="false" disabled>Marcar como concluída</button>
+    </section>
+
+    <nav class="navegacao-licao" aria-label="Navegação entre itens">
+      <a rel="prev" href="index.html">&larr; Índice do módulo</a>
+      <a rel="next" href="exercicio.html">Próximo: Exercício de SpecWeave &rarr;</a>
+    </nav>
+  </main>
+</body>
+</html>
