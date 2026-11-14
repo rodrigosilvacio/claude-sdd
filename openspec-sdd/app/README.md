@@ -1,107 +1,191 @@
-# Loja simulada com gêmeo digital
+# Loja Gêmeo Digital
 
-Aplicação da change OpenSpec `loja-estoque-mvp`: uma loja de roupas simulada em que cada peça selecionada baixa 1 unidade do estoque. A loja aparece como um gêmeo digital em 3D, e você pode selecionar as peças com a mão, pela webcam.
+**Uma loja de roupas simulada em 3D, em que o estoque reage a cada peça escolhida, com seleção por gesto de mão pela webcam.**
 
-## Como rodar
+🔗 **Demo:** https://rodrigosilvacio.github.io/claude-sdd/ (no ar depois do merge do PR e da ativação do GitHub Pages)
 
-```bash
-npm install        # também prepara os arquivos do MediaPipe em public/mediapipe
-npm run dev        # abre em http://localhost:5173
-```
+![Loja Gêmeo Digital: cena 3D com araras e prateleiras, cursor de mão sobre o Vestido Floral e carrinho com 3 itens](docs/img/gemeo-digital.png)
 
-| Script | O que faz |
+*Captura com câmera simulada: o cursor de mão (círculo âmbar) aponta o Vestido Floral, a Jaqueta Jeans aparece esgotada na cena e no catálogo, e o carrinho soma R$ 479,70.*
+
+---
+
+## Resumo executivo
+
+| | |
 |---|---|
-| `npm test` | testes unitários e de componente (Vitest) |
-| `npm run test:e2e` | testes de ponta a ponta (Playwright) |
-| `npm run build` | checagem de tipos e build estático em `dist/` |
-| `npm run preparar-mediapipe` | copia o WASM e baixa o modelo de mãos de novo |
+| **O que é** | Gêmeo digital de uma loja física: araras, prateleiras e peças em 3D, com o estoque de cada peça visível em tempo real |
+| **O que demonstra** | Três capacidades num só produto: regra de negócio de estoque, visualização espacial (gêmeo digital) e interação por visão computacional (mapeamento de mãos) |
+| **Para que serve** | Laboratório para avaliar Spec-Driven Development com OpenSpec e vitrine prática de IA aplicada para workshops e eventos |
+| **Status** | MVP implementado, com 84 testes automatizados. Falta validar os gestos com webcam e mão reais |
+| **Custo de operação** | Zero: site estático no GitHub Pages, sem servidor e sem banco de dados |
 
-## Estoque
+## Por que este produto existe
 
-Regras definidas em `openspec/changes/loja-estoque-mvp/specs/estoque-carrinho/spec.md` e implementadas como funções puras em `src/dominio/estoque.ts`.
+Falar de gêmeo digital e visão computacional costuma ficar no slide. Este produto coloca as duas coisas na mão de quem está assistindo: a pessoa aponta para uma peça, faz uma pinça com os dedos e vê o estoque cair na hora, na cena 3D, no catálogo e no carrinho.
 
-| Ação | Efeito | Recusa |
+Ele também é o caso de teste do repositório `claude-sdd`: foi especificado, planejado e construído pelo fluxo OpenSpec (explorar, propor, aplicar). Assim, mostra na prática como uma especificação vira código verificável.
+
+## Para quem
+
+| Persona | O que ela quer | Como o produto entrega |
 |---|---|---|
-| Selecionar peça | saldo diminui 1, carrinho aumenta 1 | `ESGOTADO` quando o saldo é 0 |
-| Remover 1 do carrinho | carrinho diminui 1, saldo aumenta 1; a linha some ao chegar a 0 | `FORA_DO_CARRINHO` |
-| Esvaziar carrinho | todas as unidades do carrinho voltam ao saldo | nunca |
-| Resetar loja | saldos voltam ao semente e o carrinho fica vazio | nunca |
+| **Executivo ou conselheiro em workshop** | Entender gêmeo digital e IA sem jargão | Experimenta com a própria mão em menos de um minuto |
+| **Líder de tecnologia ou CTO** | Avaliar se SDD e vibe coding geram software sério | Specs, design, tarefas e testes rastreáveis lado a lado |
+| **Time de produto ou dados** | Um exemplo concreto de regra de negócio testável | Estoque com invariante garantida por teste de propriedade |
+| **Facilitador de evento** | Demo que funciona sem instalar nada | Abre no navegador sem instalar nada, e o botão "Resetar loja" prepara a próxima pessoa |
 
-Invariante garantida por teste de propriedade: **para toda peça, saldo + quantidade no carrinho = saldo semente**, e o saldo nunca fica negativo.
+## Como funciona
 
-Exemplo (Camiseta Básica, semente 5): selecionar duas vezes deixa saldo 3 e carrinho 2; remover uma deixa saldo 4 e carrinho 1.
+```
++---------------------+     +-----------------------+     +--------------------+
+|  1. VER             |     |  2. ESCOLHER          |     |  3. ACOMPANHAR     |
+|  Loja em 3D com     | --> |  Mouse, toque ou      | --> |  Estoque baixa na  |
+|  araras, prateleiras|     |  pinça com a mão      |     |  cena, no catálogo |
+|  e saldo por peça   |     |  pela webcam          |     |  e no carrinho     |
++---------------------+     +-----------------------+     +--------------------+
+```
 
-O estado (saldos e carrinho) fica salvo no `localStorage` do navegador, na chave `loja-estoque`. Se o estado salvo estiver corrompido, for de outra versão ou quebrar a invariante, ele é descartado e a loja volta ao semente.
-
-Dados semente: `src/dados/catalogo.ts` (12 peças) e `src/dados/layout.ts` (3 araras e 2 prateleiras).
-
-## Gêmeo digital
-
-A cena 3D (`src/cena/`) mostra 3 araras e 2 prateleiras com as 12 peças nos seus lugares. Cada peça exibe o saldo atual:
-
-| Estado | Quando | Aparência |
-|---|---|---|
-| Normal | saldo 3 ou mais | cor da peça, rótulo com o saldo |
-| Saldo baixo | saldo 1 ou 2 | rótulo em âmbar |
-| Esgotado | saldo 0 | peça acinzentada e translúcida, rótulo "Esgotado" |
-
-- Arraste para girar, use a roda ou a pinça do trackpad para aproximar e afastar. "Vista inicial" volta ao enquadramento original.
-- Clique ou toque numa peça para adicioná-la ao carrinho. Arrastar não seleciona.
+### 1. Gêmeo digital da loja
+- 3 araras e 2 prateleiras com 12 peças, cada uma no seu lugar.
+- Cada peça mostra o saldo: normal, **"Últimas"** (1 ou 2 unidades, em âmbar) ou **"Esgotado"** (peça acinzentada).
+- Dá para girar e aproximar a câmera, e "Vista inicial" volta ao enquadramento original.
 - Passar o ponteiro sobre uma peça mostra nome, preço e saldo.
-- A lista do catálogo, na lateral, é uma alternativa acessível à cena.
 
-## Seleção por gestos
+### 2. Seleção por gesto (visão computacional)
+- **Aponte** com o dedo indicador: um cursor segue a sua mão, como num espelho.
+- **Faça uma pinça** (polegar com indicador) para selecionar a peça sob o cursor.
+- O cursor muda de cor quando a pinça está quase fechada e quando é reconhecida.
+- Uma pinça vale **uma** unidade, mesmo que você mantenha os dedos fechados.
 
-1. Clique em **✋ Ativar gestos** e leia o aviso de privacidade.
-2. Clique em **Permitir câmera** e autorize no navegador.
-3. Aponte com o **dedo indicador**: um círculo branco segue o seu dedo como num espelho, e a peça sob ele fica destacada.
-4. **Junte polegar e indicador (pinça)** para selecionar. O círculo fica âmbar quando a pinça está quase fechada e roxo quando ela é reconhecida.
-5. Cada pinça seleciona **uma** unidade. Para selecionar de novo, abra os dedos e repita (intervalo mínimo de 0,6 s).
-6. **Desativar gestos** desliga a câmera na hora. Mouse e toque funcionam o tempo todo.
+### 3. Estoque e carrinho
+- Selecionar baixa 1 unidade do estoque e adiciona 1 ao carrinho.
+- Remover do carrinho devolve a unidade ao estoque.
+- Peça esgotada não pode ser selecionada, por nenhum meio.
+- O estado fica salvo no navegador, e "Resetar loja" volta tudo ao estoque inicial.
 
-Requisitos e dicas:
+## Regras de negócio
 
-- A câmera só funciona em `localhost` ou HTTPS (exigência dos navegadores). `npm run dev` já serve em `localhost`.
-- Use luz frontal e um fundo sem muita informação. Mantenha a mão a uns 40 a 80 cm da câmera.
-- Os limiares de pinça, a suavização e os tempos ficam em `src/gestos/config.ts`.
-- Se a câmera for negada, não existir ou o modelo não carregar, a loja avisa o motivo e continua funcionando com mouse e toque.
+| Regra | Comportamento |
+|---|---|
+| Baixa ao selecionar | Cada seleção aceita reduz o saldo em exatamente 1 |
+| Bloqueio por esgotamento | Saldo zero recusa a seleção e mostra "Esgotado" |
+| Devolução | Remover do carrinho devolve exatamente 1 unidade |
+| Conservação | Para toda peça, **saldo + carrinho = estoque inicial**, sempre |
+| Uma seleção por gesto | A pinça só volta a valer depois de abrir os dedos e de 0,6 s |
+| Concorrência local | Duas seleções simultâneas na última unidade: só uma é aceita |
 
-### Privacidade (LGPD)
+A especificação completa, com cenários Given/When/Then, está nas specs da change ([links abaixo](#documentação)).
 
-- A câmera fica **desligada por padrão** e só é acessada depois do aviso e do seu clique.
-- O vídeo é processado **somente no navegador** pelo MediaPipe Hands. O modelo e o WASM são servidos pela própria aplicação (`public/mediapipe/`), sem CDN.
-- Nenhum quadro, imagem ou coordenada da mão é gravado, enviado pela rede ou salvo no `localStorage`. Só o estoque e o carrinho são salvos.
-- O teste `e2e/privacidade.spec.ts` verifica isso com o detector real rodando: nenhuma requisição externa, nenhum envio de dados e nada além do estado da loja no armazenamento.
+## Privacidade e governança (LGPD)
 
-## Testes
+A câmera é o ponto mais sensível do produto, então ela foi tratada como requisito, e não como detalhe:
 
-```bash
-npm test
-npx playwright install chromium   # só na primeira vez, se não houver Chromium do Playwright
-PW_CHROMIUM_PATH=/caminho/do/chromium npm run test:e2e   # PW_CHROMIUM_PATH é opcional
+- **Desligada por padrão.** Só liga depois de um aviso em linguagem simples e de um clique da pessoa.
+- **Processamento 100% local.** O modelo de detecção de mãos roda no navegador. O modelo e o motor são servidos pelo próprio site, sem serviços de terceiros.
+- **Nada é gravado nem enviado.** Nenhuma imagem, quadro de vídeo ou coordenada da mão sai do dispositivo ou fica salva. Só o estoque e o carrinho ficam no navegador.
+- **Desligar é imediato.** "Desativar gestos" libera a câmera na hora.
+- **Verificado por teste.** Um teste automatizado liga o detector real e confirma que não há nenhuma requisição externa e nenhum dado das mãos armazenado.
+- **Sempre há alternativa.** Se a câmera for negada ou não existir, a loja explica o motivo e continua funcionando com mouse e toque.
+
+## Arquitetura em uma página
+
+```
+                    Navegador do visitante (nenhum servidor)
+ +---------------------------------------------------------------------+
+ |                                                                     |
+ |  Webcam --> MediaPipe Hands --> pipeline de gestos --+              |
+ |            (roda local)        (cursor + pinça)      |              |
+ |                                                      v              |
+ |  Mouse / toque ---------------------------> camada de ponteiro      |
+ |                                              unificada              |
+ |                                                      |              |
+ |                                                      v              |
+ |                                  regras de estoque (funções puras)  |
+ |                                                      |              |
+ |               +----------------------+---------------+              |
+ |               v                      v               v              |
+ |          Cena 3D                 Carrinho     localStorage          |
+ |    (gêmeo digital)             e catálogo   (estoque e carrinho)    |
+ +---------------------------------------------------------------------+
+          ^
+          |  site estático (HTML, JS, modelo de mãos)
+     GitHub Pages  <--  GitHub Actions (lint, testes, build, deploy)
 ```
 
-Os testes e2e rodam sobre um build com `VITE_E2E=1`, que expõe ganchos de teste (`window.__gemeo` e `window.__gestos`). O Chromium usa uma câmera falsa (`--use-fake-device-for-media-stream`). Os cenários de gesto usam um detector roteirizado que injeta landmarks sintéticos, e o teste de privacidade usa o MediaPipe real. Builds normais (`npm run build`) não incluem esses ganchos.
+**Stack:** React, TypeScript, Vite, Zustand, Three.js (React Three Fiber) e MediaPipe Hands. Publicação no GitHub Pages via GitHub Actions.
 
-## Publicação no GitHub Pages
+A decisão central é que **mouse, toque e mão passam pela mesma camada de ponteiro e pelas mesmas regras de estoque**. Não existe um caminho "especial" para o gesto, e por isso as regras valem igualmente para qualquer forma de interação.
 
-O workflow `.github/workflows/pages.yml` (na raiz do repositório):
+## Qualidade
 
-1. roda em todo push que altera `openspec-sdd/app/`, ou manualmente em **Actions → Run workflow**;
-2. instala as dependências com `MEDIAPIPE_OBRIGATORIO=1` (se o modelo de mãos não baixar, o build falha em vez de publicar sem gestos);
-3. roda lint e testes unitários;
-4. gera o build com `VITE_BASE=/<nome-do-repositório>/` e confere que o modelo e o WASM estão no pacote;
-5. publica no Pages **somente a partir do branch padrão** do repositório (ou por disparo manual).
+| Verificação | Resultado |
+|---|---|
+| Testes unitários e de componente | 70 passando |
+| Testes de ponta a ponta no navegador | 14 passando (cena 3D, gestos, privacidade) |
+| Teste de propriedade da regra de conservação | 300 sequências aleatórias de operações por execução |
+| Validação da especificação (`openspec validate --strict`) | válida |
+| Pipeline de publicação | lint, testes e build a cada alteração |
 
-Configuração única no GitHub: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
+## Métricas de sucesso (propostas)
 
-Endereço: `https://<usuário>.github.io/<repositório>/`. O Pages serve em HTTPS, então a câmera funciona.
+Ainda não há medição de uso. Para avaliar o produto em workshops e eventos, a proposta é acompanhar:
 
-Para testar localmente como no Pages:
+| Métrica | Tipo | Meta sugerida |
+|---|---|---|
+| Tempo até a primeira seleção por gesto | adoção | menos de 60 s |
+| Taxa de pinças reconhecidas na primeira tentativa | qualidade | 80% ou mais |
+| Seleções acidentais (desfeitas em até 5 s) | qualidade | menos de 10% |
+| Participantes que ativaram os gestos | engajamento | 70% ou mais |
+
+Medir isso exige registrar eventos de uso, o que hoje está fora do escopo (veja o roadmap).
+
+## Status e roadmap
+
+**Agora (MVP)**
+- [x] Estoque com baixa, devolução, bloqueio, esvaziar e resetar
+- [x] Gêmeo digital 3D sincronizado em tempo real
+- [x] Seleção por pinça com mapeamento de mãos local
+- [x] Publicação automatizada no GitHub Pages
+- [ ] Validação com webcam e mão reais (pinça, duas mãos e roteiro de demo completo)
+- [ ] Arquivar a change no OpenSpec, transformando as specs em fonte oficial da verdade
+
+**Próximo (a decidir)**
+- **Estoque compartilhado com Supabase:** todos os visitantes veem a mesma loja, e quem pega a última peça esgota a peça para todos. Isso exige baixa atômica no banco, reserva com expiração no carrinho e proteção contra abuso.
+- **Métricas de uso** para medir as metas acima.
+
+**Depois**
+- Estoque por tamanho e cor (SKU).
+- Seleção por permanência do cursor (dwell), como opção de acessibilidade.
+- Layout da loja editável.
+
+## Limitações conhecidas
+
+- O estoque é **individual por navegador**: dois visitantes não compartilham a loja.
+- Peças são representações estilizadas, não modelos 3D realistas.
+- O reconhecimento da mão depende de boa luz e de um fundo pouco poluído.
+- Não há checkout, pagamento nem login. É uma simulação.
+
+## Experimente
+
+**Online:** abra a [demo](https://rodrigosilvacio.github.io/claude-sdd/), clique em **✋ Ativar gestos**, permita a câmera e faça uma pinça sobre uma peça.
+
+**Localmente:**
 
 ```bash
-VITE_BASE=/claude-sdd/ npm run build
-VITE_BASE=/claude-sdd/ npx vite preview   # abre em http://localhost:4173/claude-sdd/
+cd openspec-sdd/app
+npm install
+npm run dev
 ```
 
-Cada visitante tem o próprio estoque, salvo no navegador dele. Não há backend.
+Depois abra http://localhost:5173.
+
+## Documentação
+
+| Documento | Conteúdo |
+|---|---|
+| [Guia de desenvolvimento](docs/desenvolvimento.md) | scripts, testes, configuração dos gestos e publicação |
+| [Proposta](../openspec/changes/loja-estoque-mvp/proposal.md) | por que o produto existe e o que está fora do escopo |
+| [Design técnico](../openspec/changes/loja-estoque-mvp/design.md) | decisões, alternativas consideradas e riscos |
+| [Tarefas](../openspec/changes/loja-estoque-mvp/tasks.md) | plano de implementação e o que está pendente |
+| Specs: [estoque e carrinho](../openspec/changes/loja-estoque-mvp/specs/estoque-carrinho/spec.md), [gêmeo digital](../openspec/changes/loja-estoque-mvp/specs/gemeo-digital-loja/spec.md), [seleção por gestos](../openspec/changes/loja-estoque-mvp/specs/selecao-por-gestos/spec.md) | requisitos e cenários testáveis |
