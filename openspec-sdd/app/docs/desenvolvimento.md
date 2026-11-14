@@ -95,6 +95,8 @@ O workflow `.github/workflows/pages.yml` (na raiz do repositório):
 
 Configuração única no GitHub: **Settings → Pages → Build and deployment → Source: GitHub Actions**.
 
+> **Atenção:** não use **Deploy from a branch**. Nesse modo, o Pages publica a pasta escolhida do repositório (por exemplo, a raiz, que só tem um README) e sobrescreve a loja a cada push no branch padrão. Se o site mostrar um README em vez da loja, volte a fonte para **GitHub Actions** e rode o workflow de novo em **Actions → Loja Gêmeo Digital (GitHub Pages) → Run workflow**.
+
 Endereço: `https://<usuário>.github.io/<repositório>/`. O Pages serve em HTTPS, então a câmera funciona.
 
 Para testar localmente como no Pages:
