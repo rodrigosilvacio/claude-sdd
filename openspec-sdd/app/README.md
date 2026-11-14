@@ -2,7 +2,7 @@
 
 **Uma loja de roupas simulada em 3D, em que o estoque reage a cada peça escolhida, com seleção por gesto de mão pela webcam.**
 
-🔗 **Demo:** https://rodrigosilvacio.github.io/claude-sdd/ (no ar depois do merge do PR e da ativação do GitHub Pages)
+🔗 **Demo ao vivo:** [rodrigosilvacio.github.io/claude-sdd](https://rodrigosilvacio.github.io/claude-sdd/), publicada no GitHub Pages. Abra num navegador com webcam, clique em **✋ Ativar gestos** e faça uma pinça sobre uma peça.
 
 ![Loja Gêmeo Digital: cena 3D com araras e prateleiras, cursor de mão sobre o Vestido Floral e carrinho com 3 itens](docs/img/gemeo-digital.png)
 
@@ -17,7 +17,7 @@
 | **O que é** | Gêmeo digital de uma loja física: araras, prateleiras e peças em 3D, com o estoque de cada peça visível em tempo real |
 | **O que demonstra** | Três capacidades num só produto: regra de negócio de estoque, visualização espacial (gêmeo digital) e interação por visão computacional (mapeamento de mãos) |
 | **Para que serve** | Laboratório para avaliar Spec-Driven Development com OpenSpec e vitrine prática de IA aplicada para workshops e eventos |
-| **Status** | MVP implementado, com 84 testes automatizados. Falta validar os gestos com webcam e mão reais |
+| **Status** | MVP no ar no GitHub Pages, com 84 testes automatizados. Falta validar os gestos com webcam e mão reais |
 | **Custo de operação** | Zero: site estático no GitHub Pages, sem servidor e sem banco de dados |
 
 ## Por que este produto existe
@@ -146,7 +146,7 @@ Medir isso exige registrar eventos de uso, o que hoje está fora do escopo (veja
 - [x] Estoque com baixa, devolução, bloqueio, esvaziar e resetar
 - [x] Gêmeo digital 3D sincronizado em tempo real
 - [x] Seleção por pinça com mapeamento de mãos local
-- [x] Publicação automatizada no GitHub Pages
+- [x] Publicação automatizada no GitHub Pages (fonte: GitHub Actions)
 - [ ] Validação com webcam e mão reais (pinça, duas mãos e roteiro de demo completo)
 - [ ] Arquivar a change no OpenSpec, transformando as specs em fonte oficial da verdade
 
