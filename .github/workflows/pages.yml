@@ -1,0 +1,69 @@
+name: Loja Gêmeo Digital (GitHub Pages)
+
+on:
+  push:
+    paths:
+      - 'openspec-sdd/app/**'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
+
+defaults:
+  run:
+    working-directory: openspec-sdd/app
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: openspec-sdd/app/package-lock.json
+
+      - name: Instalar dependências (baixa o modelo de mãos do MediaPipe)
+        run: npm ci
+        env:
+          MEDIAPIPE_OBRIGATORIO: '1'
+
+      - name: Lint e testes unitários
+        run: |
+          npm run lint
+          npm test
+
+      - name: Build para o Pages
+        run: npm run build
+        env:
+          VITE_BASE: /${{ github.event.repository.name }}/
+
+      - name: Conferir arquivos do MediaPipe no build
+        run: |
+          test -s dist/mediapipe/hand_landmarker.task
+          test -s dist/mediapipe/wasm/vision_wasm_internal.wasm
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: openspec-sdd/app/dist
+
+  deploy:
+    # Publica só a partir do branch padrão do repositório (ou disparo manual).
+    if: github.ref_name == github.event.repository.default_branch || github.event_name == 'workflow_dispatch'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4
